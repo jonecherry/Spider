@@ -1,0 +1,150 @@
+伦敦,景点,特拉法加广场, Trafalgar Square
+伦敦,美食,Nando's,Nando's
+伦敦,景点,9¾站台, Platform 9¾
+伦敦,交通,国王十字火车站, King's Cross Railway Station
+伦敦,景点,自然历史博物馆, Natural History Museum
+伦敦,景点,福尔摩斯博物馆, Sherlock Holmes Museum
+伦敦,景点,伦敦杜莎夫人蜡像馆, Madame Tussauds London
+伦敦,景点,圣詹姆斯公园, St James' Park
+伦敦,购物,邦德街, Bond Street
+伦敦,购物,伦敦M豆世界, M&amp;m’s World London
+伦敦,景点,唐宁街10号, 10 Downing Street
+伦敦,景点,皮卡迪里广场, Piccadilly Circus
+伦敦,购物,科文特花园, Covent Garden
+伦敦,景点,维多利亚与艾伯特博物馆, Victoria &amp; Albert Museum
+伦敦,购物,塞尔福里奇百货公司, Selfridges
+伦敦,景点,特拉法加广场, Trafalgar Square
+伦敦,美食,Nando's,Nando's
+伦敦,景点,9¾站台, Platform 9¾
+伦敦,交通,国王十字火车站, King's Cross Railway Station
+伦敦,景点,自然历史博物馆, Natural History Museum
+伦敦,景点,福尔摩斯博物馆, Sherlock Holmes Museum
+伦敦,景点,伦敦杜莎夫人蜡像馆, Madame Tussauds London
+伦敦,景点,圣詹姆斯公园, St James' Park
+伦敦,购物,邦德街, Bond Street
+伦敦,购物,伦敦M豆世界, M&amp;m’s World London
+伦敦,景点,唐宁街10号, 10 Downing Street
+伦敦,景点,皮卡迪里广场, Piccadilly Circus
+伦敦,购物,科文特花园, Covent Garden
+伦敦,景点,维多利亚与艾伯特博物馆, Victoria &amp; Albert Museum
+伦敦,购物,塞尔福里奇百货公司, Selfridges
+伦敦,景点,特拉法加广场, Trafalgar Square
+伦敦,美食,Nando's,Nando's
+伦敦,景点,9¾站台, Platform 9¾
+伦敦,交通,国王十字火车站, King's Cross Railway Station
+伦敦,景点,自然历史博物馆, Natural History Museum
+伦敦,景点,福尔摩斯博物馆, Sherlock Holmes Museum
+伦敦,景点,伦敦杜莎夫人蜡像馆, Madame Tussauds London
+伦敦,景点,圣詹姆斯公园, St James' Park
+伦敦,购物,邦德街, Bond Street
+伦敦,购物,伦敦M豆世界, M&amp;m’s World London
+伦敦,景点,唐宁街10号, 10 Downing Street
+伦敦,景点,皮卡迪里广场, Piccadilly Circus
+伦敦,购物,科文特花园, Covent Garden
+伦敦,景点,维多利亚与艾伯特博物馆, Victoria &amp; Albert Museum
+伦敦,购物,塞尔福里奇百货公司, Selfridges
+伦敦,购物,摄政街, Regent Street
+伦敦,购物,博罗市场, Borough Market
+伦敦,景点,碎片大厦, The Shard
+伦敦,景点,格林公园, Green Park
+伦敦,景点,诺丁山, Notting Hill
+伦敦,景点,摄政公园, The Regent’s Park
+伦敦,景点,千禧桥, Millennium Bridge
+伦敦,景点,威斯敏斯特大教堂, Westminster Cathedral
+伦敦,景点,泰特现代美术馆, Tate Modern
+伦敦,景点,肯辛顿宫, Kensington Palace
+伦敦,景点,肯辛顿花园, Kensington Gardens
+伦敦,购物,福南梅森, Fortnum &amp; Mason
+伦敦,娱乐,女王陛下剧院, Her Majesty's Theatre
+伦敦,美食,龙虾餐厅, Burger And Lobster(soho)
+伦敦,交通,帕丁顿站, Paddington Station
+伦敦,景点,伦敦动物园, Zsl London Zoo
+伦敦,购物,波特贝罗路跳蚤市场, Portobello Road Market
+伦敦,景点,国家肖像美术画廊, National Portrait Gallery
+伦敦,购物,新考文特花园市场, New Covent Garden Market
+伦敦,娱乐,酋长球场, Emirates Stadium
+伦敦,购物,Hamleys,Hamleys
+伦敦,景点,皇家马厩, Royal Mews
+伦敦,景点,斯坦福桥球场, Stamford Bridge Stadium
+伦敦,景点,旧皇家海军学院, Old Royal Naval College
+伦敦,娱乐,莎士比亚圆形剧场, Shakespeare's Globe
+伦敦,景点,大英图书馆, British Library
+伦敦,景点,维多利亚与艾伯特博物馆儿童馆, Victoria And Albert Mu...
+伦敦,娱乐,华纳工厂, Warner Bros. Studio Tour London
+伦敦,购物,卡姆登市场, Camden Market
+伦敦,购物,布里克巷, Brick Lane Market
+伦敦,景点,圣詹姆士公园, St James's Park
+伦敦,娱乐,皇家艾尔伯特音乐厅, Royal Albert Hall
+伦敦,景点,国家航海博物馆, National Maritime Museum
+伦敦,景点,市政厅, City Hall
+伦敦,景点,温布顿草地网球博物馆, Wimbledon Lawn Tennis Museum
+伦敦,景点,汉普顿宫, Hampton Court Palace
+伦敦,景点,波洛克玩具博物馆, Pollock's Toy Museum &amp; Shop
+伦敦,景点,伦敦官府大道皇家骑兵卫队, Horse Guards Parade At Whi...
+伦敦,景点,女王官邸, Queen's House
+伦敦,购物,东伦敦花市, Columbia Road Flower Market
+伦敦,景点,伦敦交通博物馆, London Transport Museum
+伦敦,景点,St, Paul's Church
+伦敦,景点,滑铁卢桥, Waterloo Bridge
+伦敦,景点,珍宝塔, Jewel Tower
+伦敦,景点,金丝雀码头, Canary Wharf
+伦敦,景点,科学博物馆, Science Museum
+伦敦,交通,邱园地铁站, Kewgardens地铁站
+伦敦,景点,伦敦大火纪念塔, Monument To The Great Fire Of London
+伦敦,美食,Rock, &amp; Sole Plaice
+伦敦,景点,伦敦博物馆,伦敦博物馆
+伦敦,美食,Angus, Steak House
+伦敦,交通,希思罗机场1、2、3号航站楼地铁站, Heathrowterminals1,...
+伦敦,景点,丘吉尔作战室, Churchill War Rooms
+伦敦,交通,维多利亚火车站, Victoria Railway Station
+伦敦,景点,英格兰银行博物馆, Bank Of England Museum
+伦敦,景点,海事博物館, National Marine Museum
+伦敦,购物,Burberry伦敦工厂店, Burberry Factory Outlet
+伦敦,景点,大理石拱门, Marble Arch
+伦敦,美食,Laduree,Laduree
+伦敦,美食,正宗兰州拉面,正宗兰州拉面
+伦敦,美食,Restaurant, Gordon Ramsay
+伦敦,美食,Pret, A Manger
+伦敦,美食,Angus, Steakhouse(cranbourn St)
+伦敦,景点,圣乔治教堂, St. George's Church
+伦敦,交通,贝克街地铁站, Bakerstreet地铁站
+伦敦,美食,Borough, Market
+伦敦,购物,Westfield,Westfield
+伦敦,购物,Primark, Stores (oxford)
+伦敦,购物,柯芬花园, Covent Garden
+伦敦,交通,帕丁顿车站, Paddington Station
+伦敦,娱乐,皇家歌剧院, Royal Opera House
+伦敦,娱乐,Phantom, Of The Opera London
+伦敦,娱乐,女王剧院, Queen’s Theatre
+伦敦,购物,美体小铺, The Body Shop
+伦敦,景点,里士满公园, Richmond Park
+伦敦,娱乐,Lyceum, Theatre
+伦敦,美食,Snog,Snog
+伦敦,美食,人民公社, Baozi Inn
+伦敦,购物,格林威治市场, Greenwich Market
+伦敦,美食,Alain, Ducasse At The Dorchester
+伦敦,景点,帝国战争博物馆, Imperial War Museum
+伦敦,购物,Beatles, Store
+伦敦,美食,Windsor, Castle
+伦敦,交通,莱斯特广场地铁站, Leicestersquare地铁站
+伦敦,景点,亚伯特纪念碑, Albert Memorial
+伦敦,景点,查令十字街, Charing Cross Road
+伦敦,购物,自由店, Liberty
+伦敦,购物,伯灵顿市场街, Burlington Arcade
+伦敦,景点,Wallace, Collection
+伦敦,美食,文兴酒家,文兴酒家
+伦敦,美食,Rules, Restaurant
+伦敦,景点,温布尔登1号球场,温布尔登1号球场
+伦敦,美食,Wasabi,Wasabi
+伦敦,交通,国王十字圣潘克拉斯, 地铁站 King'scrossst.pancras ...
+伦敦,美食,Afternoon, Tea
+伦敦,景点,温布尔登镇, Wimbledon
+伦敦,交通,伦敦桥地铁站, Londonbridge地铁站
+伦敦,景点,The, Household Cavalry Museum
+伦敦,景点,伦敦水族馆, Sea Life London Aquarium
+伦敦,美食,老成都,老成都
+伦敦,景点,旧皇家海军学院彩绘厅, The Painted Hall At The Old Ro...
+伦敦,景点,童年博物馆, V&amp;a Museum Of Childhood
+伦敦,娱乐,The, Sherlock Holmes Pub
+伦敦,景点,海军拱门, Admiralty Arch
+伦敦,景点,国会广场, Parliament Square

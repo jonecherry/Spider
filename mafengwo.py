@@ -16,12 +16,12 @@ if __name__ == '__main__':
 
     if not os.path.exists('zhuaqu'):
         os.mkdir('zhuaqu')
-    if not os.path.exists(os.path.join('zhuaqu','伦敦')):
-        os.mkdir(os.path.join('zhuaqu','伦敦'))
-    jilu = open(os.path.join('zhuaqu','伦敦','lundun.txt'),'a')
-    londonPOI = open('londonPOI.txt','a')
+    if not os.path.exists(os.path.join('zhuaqu','巴黎')):
+        os.mkdir(os.path.join('zhuaqu','巴黎'))
+    jilu = open(os.path.join('zhuaqu','巴黎','bali.txt'),'a')
+    POI = open('lundunPOI.txt','a')
 
-    for i in range(2,3):
+    for i in range(8,9):
         url = 'http://www.mafengwo.cn/group/s.php?q=伦敦&p='+str(i)+'&t=poi'
         html = getsource(url)
         selector = etree.HTML(html)
@@ -29,14 +29,16 @@ if __name__ == '__main__':
         # print type(html)
 
         jilu.write(html)
-        jilu.close()
+
         # poilist = selector.xpath('//div[@class="ct-text "]/h3/a/text()')
         poilist = selector.xpath('//div[@class="ct-text "]/h3')
         for poi in poilist:
             poi = poi.xpath('string(.)')
-            poi = poi.replace('\n','')
+            # poi = poi.replace('\n','')
+
             print '类型 - 中文名称 英文名称'
-            print poi.replace(' ','')
+            # print poi.replace(' ','')
+            print poi
             elements = poi.split('-')
             leixin = elements[0]
             print '类型:'
@@ -60,7 +62,8 @@ if __name__ == '__main__':
             line = '伦敦'+','+leixin+','+zhongwen+','+yingwen+'\n'
             print '收录poi:'
             print line
-            londonPOI.write(line)
+            POI.write(line)
             print '--------------------'
-    londonPOI.close()
+    jilu.close()
+    POI.close()
     print 'finished'

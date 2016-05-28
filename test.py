@@ -1,0 +1,2 @@
+import networkx
+print 'ok'
