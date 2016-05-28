@@ -19,10 +19,10 @@ if __name__ == '__main__':
     if not os.path.exists(os.path.join('zhuaqu','巴黎')):
         os.mkdir(os.path.join('zhuaqu','巴黎'))
     jilu = open(os.path.join('zhuaqu','巴黎','bali.txt'),'a')
-    POI = open('lundunPOI.txt','a')
+    POI = open('baliPOI.txt','a')
 
-    for i in range(8,9):
-        url = 'http://www.mafengwo.cn/group/s.php?q=伦敦&p='+str(i)+'&t=poi'
+    for i in range(1,20):
+        url = 'http://www.mafengwo.cn/group/s.php?q=巴黎&p='+str(i)+'&t=poi'
         html = getsource(url)
         selector = etree.HTML(html)
         # print 'html类型'
@@ -43,15 +43,24 @@ if __name__ == '__main__':
             leixin = elements[0]
             print '类型:'
             leixin = leixin.replace(' ','')
+            leixin = leixin.replace('\n','')
+
             print leixin
             temp = elements[1].split()
+            shouzimu = str(temp[0])
             if len(temp)==1:
                 zhongwen=temp[0]
                 yingwen=temp[0]
+            elif shouzimu.isalpha():
+                print shouzimu.isalpha()
+                yingwen = ''
+                for i in range(0,len(temp)):
+                    yingwen = yingwen +' '+ temp[i]
+                zhongwen = yingwen
             else:
                 zhongwen = temp[0]
                 yingwen = ''
-                for i in range(1,len(temp)):
+                for i in range(1, len(temp)):
                     yingwen = yingwen +' '+ temp[i]
 
             print '中文:'
@@ -59,7 +68,7 @@ if __name__ == '__main__':
             print '英文:'
             print yingwen
 
-            line = '伦敦'+','+leixin+','+zhongwen+','+yingwen+'\n'
+            line = '巴黎'+','+leixin+','+zhongwen+','+yingwen+'\n'
             print '收录poi:'
             print line
             POI.write(line)
