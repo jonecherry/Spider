@@ -3,6 +3,7 @@ from lxml import etree
 import requests
 import os
 import sys
+import MySQLdb
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
@@ -14,12 +15,25 @@ def getsource(url):
 
 if __name__ == '__main__':
 
+    db = 'southamerica'
+    tb = '巴西'
+
     if not os.path.exists('zhuaqu'):
         os.mkdir('zhuaqu')
-    if not os.path.exists(os.path.join('zhuaqu','巴黎')):
-        os.mkdir(os.path.join('zhuaqu','巴黎'))
-    jilu = open(os.path.join('zhuaqu','巴黎','bali.txt'),'a')
-    POI = open('baliPOI.txt','a')
+    if not os.path.exists(os.path.join('zhuaqu',tb)):
+        os.mkdir(os.path.join('zhuaqu',tb))
+    jilu = open(os.path.join('zhuaqu',tb,'jilu.txt'),'a')
+    # POI = open('baliPOI.txt','a')
+    # 连接数据库
+    try:
+        conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        cur = conn.cursor()
+        cur.execute('set interactive_timeout=96*3600')
+        conn.select_db(db)
+    except MySQLdb.Error,e:
+        print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+
+
 
     for i in range(1,20):
         url = 'http://www.mafengwo.cn/group/s.php?q=巴黎&p='+str(i)+'&t=poi'
@@ -68,11 +82,20 @@ if __name__ == '__main__':
             print '英文:'
             print yingwen
 
-            line = '巴黎'+','+leixin+','+zhongwen+','+yingwen+'\n'
+            line = tb+','+leixin+','+zhongwen+','+yingwen+'\n'
             print '收录poi:'
             print line
-            POI.write(line)
+            sqli = "INSERT INTO " + db + "." + tb + "(chinesename,englishname)" + " VALUES(%s,%s)"
+            print sqli
+            cur.execute(sqli,(zhongwen,yingwen))
+            # cur.execute("INSERT INTO " + db + "." + tb + "(chinesename,englishname)" + " VALUES( " + zhongwen + ','+yingwen + " )")
+
+            # POI.write(line)
             print '--------------------'
+
+    cur.close()
+    conn.commit()
+    conn.close()
     jilu.close()
-    POI.close()
+    # POI.close()
     print 'finished'
