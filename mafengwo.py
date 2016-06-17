@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
 
 
-    for i in range(1,1):
+    for i in range(1,46):
         url = 'http://www.mafengwo.cn/group/s.php?q=巴西&p='+str(i)+'&t=poi'
         html = getsource(url)
         jilu.write(html)
@@ -65,18 +65,21 @@ if __name__ == '__main__':
             poi = selector.xpath('//h3')[0]
             poi = poi.xpath('string(.)')
             # poi = poi.replace('\n','')
+            print poi
             elements = poi.split('-')
             leixin = elements[0]
             leixin = leixin.replace(' ', '')
             leixin = leixin.replace('\n', '')
 
             temp = elements[1].split()
+
+            if len(temp)==0:
+                continue
             shouzimu = str(temp[0])
             if len(temp) == 1:
                 zhongwen = temp[0]
                 yingwen = temp[0]
             elif shouzimu.isalpha():
-                print shouzimu.isalpha()
                 yingwen = ''
                 for i in range(0, len(temp)):
                     yingwen = yingwen + ' ' + temp[i]
@@ -87,7 +90,7 @@ if __name__ == '__main__':
                 for i in range(1, len(temp)):
                     yingwen = yingwen + ' ' + temp[i]
 
-            print '中文:',zhongwen
+            # print '中文:',zhongwen
             print '英文:',yingwen
 
             # 国家、城市
@@ -103,7 +106,7 @@ if __name__ == '__main__':
 
 
 
-            if leixin !='美食':
+            if leixin =='景点':
                 # 详情链接
                 link = selector.xpath('//h3/a/@href')[0]
                 subhtml = getsource(link)
