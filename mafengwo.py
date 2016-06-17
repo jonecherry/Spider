@@ -8,6 +8,7 @@ import re
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
+
 #getsource用来获取网页源代码
 def getsource(url):
     html = requests.get(url)
