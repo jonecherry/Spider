@@ -37,8 +37,10 @@ def getnum(commentsnum):
 
 if __name__ == '__main__':
 
-    db = 'southamerica'
-    tb = 'baxi'
+    db = 'america'
+    # 数据表
+    tb = 'miami'
+    area = 'miami'
 
     if not os.path.exists('zhuaqu'):
         os.mkdir('zhuaqu')
@@ -56,8 +58,9 @@ if __name__ == '__main__':
 
 
 
-    for i in range(1,46):
-        url = 'http://www.mafengwo.cn/group/s.php?q=巴西&p='+str(i)+'&t=poi'
+    for i in range(10,45):
+        url = 'http://www.mafengwo.cn/group/s.php?q=%s&p=%d&t=poi'%(area,i)
+        print url
         html = getsource(url)
         jilu.write(html)
         blocks = getblock(html)
