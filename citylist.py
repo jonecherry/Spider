@@ -4,6 +4,9 @@ import os
 import MySQLdb
 from lxml import etree
 import re
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 #getsource用来获取网页源代码
 def getsource(url):
@@ -17,6 +20,9 @@ def getblock(source):
 
 if __name__ == '__main__':
     starturl = 'http://place.qyer.com/usa/citylist-0-0-1/'
+    country_id = 1
+    parent_region_id = 1
+    region_type = 2
 
     db = 'map'
     # 数据表
@@ -60,8 +66,8 @@ if __name__ == '__main__':
             sub_selector = etree.HTML(sub_html)
             pa_num = sub_selector.xpath('//div[@class="plcTopBarStat fontYaHei"]/em/text()')[0]
 
-            sqli = "INSERT INTO " + db + "." + tb + "(region_ch_name,region_en_name,region_loc_name,parent_region_id,country_id,region_type,visited_count)" + " VALUES(%s,%s,%s,%d,%d,%d,%d)"
-            cur.execute(sqli,(city, cityenglishname, cityenglishname, 1, 1, 2, pa_num))
+            sqli = "INSERT INTO " + db + "." + tb + "(region_ch_name,region_en_name,region_loc_name,parent_region_id,country_id,region_type,visited_count)" + " VALUES(%s,%s,%s,%s,%s,%s,%s)"
+            cur.execute(sqli,(city, cityenglishname, cityenglishname, parent_region_id, country_id, region_type, pa_num))
             conn.commit()
             print '------------------------------------------------'
     cur.close()
