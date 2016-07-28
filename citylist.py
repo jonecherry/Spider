@@ -74,8 +74,16 @@ if __name__ == '__main__':
 
 
             sqli = "INSERT INTO " + db + "." + tb + "(region_ch_name,region_en_name,region_loc_name,parent_region_id,country_id,region_type,visited_count)" + " VALUES(%s,%s,%s,%s,%s,%s,%s)"
-            # cur.execute(sqli,(city, cityenglishname, cityenglishname, parent_region_id, country_id, region_type, pa_num))
-            # conn.commit()
+
+            # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
+            sqli1 = "select * from "+db+"."+tb+" where region_ch_name = "+"'%s'"%(city)
+
+            num_result = cur.execute(sqli1)
+            if num_result:
+                pass
+            if not num_result:
+                cur.execute(sqli,(city, cityenglishname, cityenglishname, parent_region_id, country_id, region_type, pa_num))
+                conn.commit()
             print '------------------------------------------------'
     cur.close()
     conn.close()
