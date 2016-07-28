@@ -49,7 +49,8 @@ if __name__ == '__main__':
     # 需爬取得页数
     pagenum = pagenums[len(pagenums)-2]
 
-    for i in range(1,int(pagenum)+1):
+    # for i in range(1,int(pagenum)+1):
+    for i in range(35, int(pagenum) + 1):
         url = 'http://place.qyer.com/usa/citylist-0-0-%d'%(i)
         print url
         html = getsource(url)
@@ -64,11 +65,17 @@ if __name__ == '__main__':
 
             sub_html = getsource(sub_url)
             sub_selector = etree.HTML(sub_html)
-            pa_num = sub_selector.xpath('//div[@class="plcTopBarStat fontYaHei"]/em/text()')[0]
+            pa_num = sub_selector.xpath('//div[@class="plcTopBarStat fontYaHei"]/em/text()')
+            if not pa_num:
+                pa_num = 0
+            else:
+                pa_num = pa_num[0]
+            print pa_num
+
 
             sqli = "INSERT INTO " + db + "." + tb + "(region_ch_name,region_en_name,region_loc_name,parent_region_id,country_id,region_type,visited_count)" + " VALUES(%s,%s,%s,%s,%s,%s,%s)"
-            cur.execute(sqli,(city, cityenglishname, cityenglishname, parent_region_id, country_id, region_type, pa_num))
-            conn.commit()
+            # cur.execute(sqli,(city, cityenglishname, cityenglishname, parent_region_id, country_id, region_type, pa_num))
+            # conn.commit()
             print '------------------------------------------------'
     cur.close()
     conn.close()
