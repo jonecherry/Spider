@@ -1,3 +1,8 @@
 #coding=utf-8
-str = {'美食':23,'酒店':2}
-print str['美食']
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+s = '号d'
+print len(s)
+print s[3].isalpha()

@@ -23,18 +23,9 @@ if __name__ == '__main__':
     country_id = 1
     parent_region_id = 1
     region_type = 2
-
     db = 'map'
     # 数据表
     tb = 'map_region'
-    # area = 'miami'
-
-    # if not os.path.exists('zhuaqu'):
-    #     os.mkdir('zhuaqu')
-    # if not os.path.exists(os.path.join('zhuaqu',tb)):
-    #     os.mkdir(os.path.join('zhuaqu',tb))
-    # chengshijilu = open('chengshijilu.txt','a')
-
     # 连接数据库
     try:
         conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
