@@ -49,8 +49,7 @@ if __name__ == '__main__':
     # 需爬取得页数
     pagenum = pagenums[len(pagenums)-2]
 
-    # for i in range(1,int(pagenum)+1):
-    for i in range(35, int(pagenum) + 1):
+    for i in range(9, int(pagenum) + 1):
         url = 'http://place.qyer.com/usa/citylist-0-0-%d'%(i)
         print url
         html = getsource(url)
@@ -59,8 +58,8 @@ if __name__ == '__main__':
         for j,block in enumerate(blocks):
             print j
             selector1 = etree.HTML(block)
-            city = selector1.xpath('//a/text()')[0]
-            cityenglishname = selector1.xpath('//span/text()')[0]
+            city = selector1.xpath('//a/text()')[0].strip()
+            cityenglishname = selector1.xpath('//span/text()')[0].strip()
             sub_url = selector1.xpath('//a/@href')[0]
 
             sub_html = getsource(sub_url)
