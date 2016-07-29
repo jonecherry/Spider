@@ -69,7 +69,7 @@ if __name__ == '__main__':
                 pa_num = 0
             else:
                 pa_num = pa_num[0]
-            print pa_num
+            # print pa_num
 
 
             sqli = "INSERT INTO " + db + "." + tb + "(region_ch_name,region_en_name,region_loc_name,parent_region_id,country_id,region_type,visited_count)" + " VALUES(%s,%s,%s,%s,%s,%s,%s)"
