@@ -81,19 +81,17 @@ if __name__ == '__main__':
                             name1 = ''
                         else:
                             name1 = name1[0].strip()
-                        print name0,name1
 
-
-                        print name0[0]
-                        print name0[0].isalpha()
-                        if name0[0].isalpha():
+                        shouzimu = name0[0].encode('utf-8')
+                        if shouzimu.isalpha():
                             print '前者的首个字符是字母'
                             poi_en_name = name0
                             poi_ch_name = ''
                         else:
                             poi_en_name = name1
                             poi_ch_name = name0
-                        print '英文',poi_en_name,'中文',poi_ch_name
+                        poi_loc_name = poi_en_name
+                        print '英文',poi_en_name,'中文',poi_ch_name,'本地语言名称',poi_loc_name
                         # 对应的城市id
                         sqli1 = "select region_id from " + db + ".map_region"+ " where region_ch_name = " + "'%s'" % (city)
                         num_result = cur.execute(sqli1)
@@ -176,7 +174,7 @@ if __name__ == '__main__':
                         # 来源
                         source = 'qyer'
 
-                        print '中文：' + poi_ch_name, '英文：' + poi_en_name, '城市id' + str(region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '排名' + str(poi_rank),'地址'+poi_address,'电弧'+poi_telephone
+                        print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称'+poi_en_name,'城市id' + str(region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '排名' + str(poi_rank),'地址'+poi_address,'电弧'+poi_telephone
 
                         sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
@@ -201,7 +199,7 @@ if __name__ == '__main__':
                             pass
                         else:
                             print '插入新POI'
-                            cur.execute(sqli,(poi_ch_name, poi_en_name, poi_ch_name, region_id, tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source))
+                            cur.execute(sqli,(poi_ch_name, poi_en_name, poi_loc_name, region_id, tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source))
                             conn.commit()
                         print '------------------------------------------------'
     cur.close()
