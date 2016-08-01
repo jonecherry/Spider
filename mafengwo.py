@@ -43,14 +43,13 @@ def jiexi(html):
         poi = selector.xpath('//h3')[0]
         poi = poi.xpath('string(.)')
         # poi = poi.replace('\n','')
-        print poi
+
         elements = poi.split('-')
         leixin = elements[0]
         leixin = leixin.replace(' ', '')
         leixin = leixin.replace('\n', '')
 
         temp = elements[1].split()
-
 
         if len(temp) == 0:
             continue
@@ -69,9 +68,6 @@ def jiexi(html):
             yingwen = ''
             for i in range(1, len(temp)):
                 yingwen = yingwen + ' ' + temp[i]
-
-        # print '英文:', yingwen
-        # print '中文:',zhongwen
 
         # 判断数据库是否已经存在该POI记录，决定是插入数据还是更新数据。
         sqli1 = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (zhongwen)
@@ -130,7 +126,6 @@ def jiexi(html):
         subselector = etree.HTML(subhtml)
 
         if leixin == '景点':
-
             quguoshoucang = subselector.xpath('//span[@class="pa-num"]/text()')
             # 去过数
             quguonum = quguoshoucang[1]
@@ -138,16 +133,20 @@ def jiexi(html):
             shoucangshu = quguoshoucang[0]
             # 评分
             poi_score = ''
-        #     排名
+            # 排名
             poi_rank = ''
+            # 地址
             poi_address = ''
-            poi_telephone_tag = subselector.xpath('//dl[@class="intro"]/span/text()')
-            if not poi_telephone_tag:
-                poi_telephone = ''
-            elif  poi_telephone_tag and poi_telephone_tag == '电话':
-                poi_telephone = subselector.xpath('//dl[@class="intro]/dd[1]/p/text()"')[0]
+            poi_telephone_tag = subselector.xpath('//dl[@class="intro"]/dd/span/text()')
+            if '电话' in poi_telephone_tag:
+                for ti,tele_tag in enumerate(poi_telephone_tag):
+                    if tele_tag == '电话':
+                        telei = str(ti+1)
+                xpath_tele = '//dl[@class="intro"]/dd['+telei+']/p/text()'
+                poi_telephone = subselector.xpath(xpath_tele)[0]
             else:
-                poi_telephone = ''
+                poi_telephone =''
+            print '电话',poi_telephone
         else:
             quguonum = ''
             shoucangshu = ''
@@ -163,35 +162,42 @@ def jiexi(html):
                 poi_rank = ''
             else:
                 poi_rank = poi_rank[0][3:]
-            # 地址
-            poi_address = subselector.xpath('//i[@class="icon-location"]/text()')
-            if not poi_address:
+            # 地址，电话
+            box_info = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li/text()')
+            print '++++++++',len(box_info)
+            if len(box_info)>=4:
+                poi_address = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[1]/text()')[1].strip()
+                for chari,addchar in enumerate(poi_address):
+                    if addchar == "：":
+                        tempi = chari
+                        poi_address = poi_address[tempi+1:]
+                        print '???',poi_address
+                poi_telephone = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[2]/text()')[1].strip()
+            elif len(box_info)==3:
+                poi_address = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[1]/text()')[1].strip()
+                poi_telephone =''
+            else:
+                poi_telephone =''
                 poi_address = ''
-            else:
-                poi_address = poi_address[0].strip()
-            #  电话
-            poi_telephone = subselector.xpath('//i[@class="icon-tel"]/text()')
-            if not poi_telephone:
-                poi_telephone = ''
-            else:
-                poi_telephone= poi_telephone[0].strip()
 
-        print '国家:' + country, '城市：' + city, '中文：' + zhongwen, '英文：' + yingwen, '城市id' + str(region_id), '类型：' + str(tag_id), '类型' + leixin, \
+            print '地址：',poi_address,'电话',poi_telephone
+
+        print '国家:' + country, '城市：' + city, '中文：' + zhongwen, '英文：' + yingwen, '城市id' + str(region_id), '类型id：' + str(tag_id), '类型:' + leixin, \
             '评论数' + str(pinglunshu), '相关游记数' + str(relatedyoujishu), '去过数' + str(quguonum), '收藏数' + str(shoucangshu), '评分' + str(poi_score), \
             '排名' + str(poi_rank), '电话' + str(poi_telephone), '地址' + poi_address
 
         if r1 or r2:
-            print '￥￥￥已经存在记录，替换记录。。。。'
+            print '已经存在记录，更新数据... ...'
             pass
         else:
-            print '+++++新增记录'
+            print '新增POI... ...'
             sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_rank,poi_address,poi_telephone,visited_count,comments_count,collection_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             # print sqli
 
 
             cur.execute(sqli,(zhongwen,yingwen,yingwen,region_id,tag_id,poi_score,poi_rank,poi_address,poi_telephone,quguonum,pinglunshu,shoucangshu,source))
             conn.commit()
-
+        print '----------------------------------------'
 if __name__ == '__main__':
     # tag
     taglist = {'美食':1,'酒店':2,'景点':3,'购物':4,'娱乐':5,'交通':6}
