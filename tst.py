@@ -3,6 +3,9 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
-a,b,c =1
-a = 2 if a>b else a =3
-print a
+a =[ 1,2,3,5]
+for i,b in enumerate(a):
+    if i <2:
+        pass
+    else:
+        print b
