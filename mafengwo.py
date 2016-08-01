@@ -35,6 +35,7 @@ def getnum(commentsnum):
     ei = int(j)
     return commentsnum[si:ei]
 
+
 # 页面解析
 def jiexi(html):
     blocks = getblock(html)
@@ -77,133 +78,129 @@ def jiexi(html):
             r2 = cur.execute(sqli2)
         except:
             pass
-
-        # 国家、城市
-        poiinfos = selector.xpath('//li/a/text()')
-        country_city = poiinfos[0]
-        country_city = country_city.split('-')
-        country = country_city[0]
-        city = country_city[1]
-
-        # 查询城市id
-        sqli1 = 'select region_id from map.map_region where region_ch_name = '+"'%s'"%(city)
-        print sqli1
-        cur.execute(sqli1)
-        id = cur.fetchmany(1)
-
-        if len(id)==0:
-            region_id = ''
         else:
-            region_id = id[0][0]
+            # 国家、城市
+            poiinfos = selector.xpath('//li/a/text()')
+            country_city = poiinfos[0]
+            country_city = country_city.split('-')
+            country = country_city[0]
+            city = country_city[1]
 
+            # 查询城市id
+            sqli1 = 'select region_id from map.map_region where region_ch_name = '+"'%s'"%(city)
+            cur.execute(sqli1)
+            id = cur.fetchmany(1)
 
-        # 评论数
-        pinglunshu = getnum(poiinfos[1])
-        # 相关游记数
-        relatedyoujishu = getnum(poiinfos[2])
-
-        # tag_id
-        if leixin == '美食':
-            tag_id = 1
-        elif leixin == '酒店':
-            tag_id = 2
-        elif leixin == '景点':
-            tag_id = 3
-        elif leixin == '购物':
-            tag_id =4
-        elif leixin == '娱乐':
-            tag_id = 5
-        elif leixin == '交通':
-            tag_id = 6
-        else:
-            tag_id = ''
-
-
-        # 详情链接
-        link = selector.xpath('//h3/a/@href')[0]
-        print '详情链接',link
-        subhtml = getsource(link)
-        subselector = etree.HTML(subhtml)
-
-        if leixin == '景点':
-            quguoshoucang = subselector.xpath('//span[@class="pa-num"]/text()')
-            # 去过数
-            quguonum = quguoshoucang[1]
-            # 收藏数
-            shoucangshu = quguoshoucang[0]
-            # 评分
-            poi_score = ''
-            # 排名
-            poi_rank = ''
-            # 地址
-            poi_address = ''
-            poi_telephone_tag = subselector.xpath('//dl[@class="intro"]/dd/span/text()')
-            if '电话' in poi_telephone_tag:
-                for ti,tele_tag in enumerate(poi_telephone_tag):
-                    if tele_tag == '电话':
-                        telei = str(ti+1)
-                xpath_tele = '//dl[@class="intro"]/dd['+telei+']/p/text()'
-                poi_telephone = subselector.xpath(xpath_tele)[0]
+            if len(id)==0:
+                region_id = ''
             else:
-                poi_telephone =''
-            print '电话',poi_telephone
-        else:
-            quguonum = ''
-            shoucangshu = ''
-            # 评分
-            poi_score = subselector.xpath('//span[@class="score-info"]/em/text()')
-            if not poi_score:
+                region_id = id[0][0]
+
+
+            # 评论数
+            pinglunshu = getnum(poiinfos[1])
+            # 相关游记数
+            relatedyoujishu = getnum(poiinfos[2])
+
+            # tag_id
+            if leixin == '美食':
+                tag_id = 1
+            elif leixin == '酒店':
+                tag_id = 2
+            elif leixin == '景点':
+                tag_id = 3
+            elif leixin == '购物':
+                tag_id =4
+            elif leixin == '娱乐':
+                tag_id = 5
+            elif leixin == '交通':
+                tag_id = 6
+            else:
+                tag_id = ''
+
+
+            # 详情链接
+            link = selector.xpath('//h3/a/@href')[0]
+            print '详情链接',link
+            subhtml = getsource(link)
+            subselector = etree.HTML(subhtml)
+
+            if leixin == '景点':
+                quguoshoucang = subselector.xpath('//span[@class="pa-num"]/text()')
+                # 去过数
+                quguonum = quguoshoucang[1]
+                # 收藏数
+                shoucangshu = quguoshoucang[0]
+                # 评分
                 poi_score = ''
-            else:
-                poi_score = poi_score[0]
-            # 等级
-            poi_rank = subselector.xpath('//div[@class="ranking"]/em/text()')
-            if not poi_rank:
+                # 排名
                 poi_rank = ''
-            else:
-                poi_rank = poi_rank[0][3:]
-            # 地址，电话
-            box_info = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li/text()')
-            print '++++++++',len(box_info)
-            if len(box_info)>=4:
-                poi_address = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[1]/text()')[1].strip()
-                for chari,addchar in enumerate(poi_address):
-                    if addchar == "：":
-                        tempi = chari
-                        poi_address = poi_address[tempi+1:]
-                        print '???',poi_address
-                poi_telephone = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[2]/text()')[1].strip()
-            elif len(box_info)==3:
-                poi_address = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[1]/text()')[1].strip()
-                poi_telephone =''
-            else:
-                poi_telephone =''
+                # 地址
                 poi_address = ''
+                poi_telephone_tag = subselector.xpath('//dl[@class="intro"]/dd/span/text()')
+                if '电话' in poi_telephone_tag:
+                    for ti,tele_tag in enumerate(poi_telephone_tag):
+                        if tele_tag == '电话':
+                            telei = str(ti+1)
+                    xpath_tele = '//dl[@class="intro"]/dd['+telei+']/p/text()'
+                    poi_telephone = subselector.xpath(xpath_tele)[0]
+                else:
+                    poi_telephone =''
 
-            print '地址：',poi_address,'电话',poi_telephone
+            else:
+                quguonum = ''
+                shoucangshu = ''
+                # 评分
+                poi_score = subselector.xpath('//span[@class="score-info"]/em/text()')
+                if not poi_score:
+                    poi_score = ''
+                else:
+                    poi_score = poi_score[0]
+                # 等级
+                poi_rank = subselector.xpath('//div[@class="ranking"]/em/text()')
+                if not poi_rank:
+                    poi_rank = ''
+                else:
+                    poi_rank = poi_rank[0][3:]
+                # 地址，电话
+                box_info = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li/text()')
+                # print '++++++++',len(box_info)
+                if len(box_info)>=4:
+                    poi_address = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[1]/text()')[1].strip()
+                    for chari,addchar in enumerate(poi_address):
+                        if addchar == "：":
+                            tempi = chari
+                            poi_address = poi_address[tempi+1:]
+                    poi_telephone = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[2]/text()')[1].strip()
+                elif len(box_info)==3:
+                    poi_address = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[1]/text()')[1].strip()
+                    poi_telephone =''
+                else:
+                    poi_telephone =''
+                    poi_address = ''
 
-        print '国家:' + country, '城市：' + city, '中文：' + zhongwen, '英文：' + yingwen, '城市id' + str(region_id), '类型id：' + str(tag_id), '类型:' + leixin, \
-            '评论数' + str(pinglunshu), '相关游记数' + str(relatedyoujishu), '去过数' + str(quguonum), '收藏数' + str(shoucangshu), '评分' + str(poi_score), \
-            '排名' + str(poi_rank), '电话' + str(poi_telephone), '地址' + poi_address
+            print '国家:' + country, '城市：' + city, '中文：' + zhongwen, '英文：' + yingwen, '城市id' + str(region_id), '类型id：' + str(tag_id), '类型:' + leixin, \
+                '评论数' + str(pinglunshu), '相关游记数' + str(relatedyoujishu), '去过数' + str(quguonum), '收藏数' + str(shoucangshu), '评分' + str(poi_score), \
+                '排名' + str(poi_rank), '电话' + str(poi_telephone), '地址' + poi_address
 
-        if r1 or r2:
-            print '已经存在记录，更新数据... ...'
-            pass
-        else:
-            print '新增POI... ...'
-            sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_rank,poi_address,poi_telephone,visited_count,comments_count,collection_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-            # print sqli
+            if r1 or r2:
+                print '已经存在记录，更新数据... ...'
+                pass
+            else:
+                print '新增POI... ...'
+                sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_rank,poi_address,poi_telephone,visited_count,comments_count,collection_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                # print sqli
 
 
-            cur.execute(sqli,(zhongwen,yingwen,yingwen,region_id,tag_id,poi_score,poi_rank,poi_address,poi_telephone,quguonum,pinglunshu,shoucangshu,source))
-            conn.commit()
-        print '----------------------------------------'
+                cur.execute(sqli,(zhongwen,yingwen,yingwen,region_id,tag_id,poi_score,poi_rank,poi_address,poi_telephone,quguonum,pinglunshu,shoucangshu,source))
+                conn.commit()
+            print '----------------------------------------'
 if __name__ == '__main__':
     # tag
     taglist = {'美食':1,'酒店':2,'景点':3,'购物':4,'娱乐':5,'交通':6}
 
     # 设置白名单，过滤国家
-    chengshibaimingdan = ['美国']
+    chengshibaimingdan = ['美国','洛杉矶']
     # 来源
     source = '蚂蜂窝'
 
@@ -242,7 +239,7 @@ if __name__ == '__main__':
             if not html0:
                 pass
             else:
-            #     获取爬取的页数
+                #获取爬取的页数
                 selector0 = etree.HTML(html0)
                 # temp0 = selector0.xpath('//div[@class="m-pagination"]/span[@class="count"]/text()')
                 poinum = selector0.xpath('//p[@class="ser-result-primary"]/text()')[0]
