@@ -3,6 +3,6 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
-s = '加利福尼亚大学洛杉矶分校'
-print type(s[0])
-print s[0].isalpha()
+a,b,c =1
+a = 2 if a>b else a =3
+print a

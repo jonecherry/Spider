@@ -21,6 +21,14 @@ def getcountryblock(source):
 def getpoiblock(source):
     blocks = re.findall('(<li class="clearfix".*?</li>)',source,re.S)
     return blocks
+# 对匹配为空进行处理
+def pankong(poi_xx):
+    if len(poi_xx)==0:
+        pass
+    else:
+        poi_xx = poi_xx[0]
+    return poi_xx
+
 if __name__ == '__main__':
     starturl = 'http://place.qyer.com/usa/citylist-0-0-1/'
     country_id = 1
@@ -50,7 +58,6 @@ if __name__ == '__main__':
         selector2 = etree.HTML(html)
         blocks = getcountryblock(html)
         for j, block in enumerate(blocks):
-            # print j
             selector1 = etree.HTML(block)
             city = selector1.xpath('//a/text()')[0].strip()
             cityenglishname = selector1.xpath('//span/text()')[0].strip()
@@ -84,14 +91,13 @@ if __name__ == '__main__':
 
                         shouzimu = name0[0].encode('utf-8')
                         if shouzimu.isalpha():
-                            print '前者的首个字符是字母'
                             poi_en_name = name0
                             poi_ch_name = ''
                         else:
                             poi_en_name = name1
                             poi_ch_name = name0
                         poi_loc_name = poi_en_name
-                        print '英文',poi_en_name,'中文',poi_ch_name,'本地语言名称',poi_loc_name
+
                         # 对应的城市id
                         sqli1 = "select region_id from " + db + ".map_region"+ " where region_ch_name = " + "'%s'" % (city)
                         num_result = cur.execute(sqli1)
@@ -100,7 +106,7 @@ if __name__ == '__main__':
                         else:
                             region_id = cur.fetchmany(1)
                             region_id = region_id[0][0]
-                        print '城市id',region_id
+
                         # 类别id
                         if ci == 0:
                             tag_id = 3
@@ -114,15 +120,16 @@ if __name__ == '__main__':
                             poi_score=''
                         else:
                             poi_score = poi_score[0]
-                        print '评分',poi_score
+
                         # 排名
-                        poi_rank = dangqianselector.xpath('//em[@class="rank orange"]/text()')[0]
+                        poi_rank = dangqianselector.xpath('//em[@class="rank orange"]/text()')
+                        poi_rank = pankong(poi_rank)
                         newstr = ''
                         for sr in poi_rank:
                             if sr.isdigit():
                                 newstr = newstr + sr
                         poi_rank = newstr
-                        print '排名',poi_rank
+
                         # 详情页url
                         xiangqingurl = dangqianselector.xpath('//h3[@class="title fontYaHei"]/a/@href')[0]
                         print '详情页',xiangqingurl
@@ -149,14 +156,13 @@ if __name__ == '__main__':
 
                         else:
                             poi_address = ''
-                        print '地址', poi_address
+
                         if '电话：'in biaotilist:
                             # 电话
                             xpath_str_tele = "//ul[@class='poiDet-tips']/li[" + str(telei) + "]/div/p/text()"
                             poi_telephone = xiangqingselector.xpath(xpath_str_tele)[0]
                         else:
                             poi_telephone = ''
-                        print '电话',poi_telephone
                         # 评论数
                         pinglunshu = dangqianselector.xpath('//div[@class="info"]/span[@class="dping"]/a/text()')
                         if len(pinglunshu)==0:
@@ -170,7 +176,6 @@ if __name__ == '__main__':
                             if sr1.isdigit():
                                 newstr1 = newstr1 + sr1
                         comments_count = newstr1
-                        print '评论数',comments_count
                         # 来源
                         source = 'qyer'
 
@@ -181,8 +186,8 @@ if __name__ == '__main__':
                         # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
                         sqli1 = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (poi_ch_name)
                         sqli2 = "select * from " + db + "." + tb + " where poi_en_name = " + "'%s'" % (poi_en_name)
-                        print 'sql1',sqli1
-                        print 'sql2',sqli2
+                        print '中文查询',sqli1
+                        print '英文查询',sqli2
                         try:
                             r1 = cur.execute(sqli1)
                             r2 = cur.execute(sqli2)
@@ -192,13 +197,14 @@ if __name__ == '__main__':
                             r1 = 0
                         if poi_en_name == '':
                             r1 = 0
-                        print '中英文查询结果：'
-                        print r1,r2
+                        print '查询结果：'
+                        print '中文',r1,'英文',r2
+
                         if r1 or r2:
-                            print '$$$已经存在记录，迭代数据 ... ...'
+                            print '已经存在记录，迭代数据 ... ...'
                             pass
                         else:
-                            print '插入新POI'
+                            print '插入新POI... ...'
                             cur.execute(sqli,(poi_ch_name, poi_en_name, poi_loc_name, region_id, tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source))
                             conn.commit()
                         print '------------------------------------------------'
