@@ -172,9 +172,6 @@ def jiexi(html):
                             tempi = chari
                             poi_address = poi_address[tempi+1:]
                     poi_telephone = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[2]/text()')[1].strip()
-                elif len(box_info)==3:
-                    poi_address = subselector.xpath('//div[@class="m-box m-info"]/ul[@class="clearfix"]/li[1]/text()')[1].strip()
-                    poi_telephone =''
                 else:
                     poi_telephone =''
                     poi_address = ''
