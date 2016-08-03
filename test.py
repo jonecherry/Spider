@@ -3,6 +3,8 @@ import sys
 from lxml import etree
 import requests
 import re
+import os
+import MySQLdb
 import thread
 import time# 为线程定义一个函数
 reload(sys)
@@ -23,23 +25,28 @@ def getpoiblock(source):
     blocks = re.findall('(<li class="clearfix".*?</li>)',source,re.S)
     return blocks
 
-url = "http://place.qyer.com/los-angeles/sight/?page=1"
-html = getsource(url)
-poiblocks = getpoiblock(html)
-for block in poiblocks:
-    dangqianselector = etree.HTML(block)
-    # 中文、英文、本地名称
-    name0 = dangqianselector.xpath('//h3[@class="title fontYaHei"]/a/text()')[0].strip()
-    name1 = dangqianselector.xpath('//h3[@class="title fontYaHei"]/a/span/text()')
-    if len(name1) == 0:
-        name1 = ''
-    else:
-        name1 = name1[0].strip()
-    print name0, name1
-    shouzimu = name0[0].encode('utf-8')
-    print type(shouzimu)
-    print shouzimu.isalpha()
 
+db = 'map'
+# 数据表
+tb = 'temp'
+area = 'usa'
+
+
+# 连接数据库
+try:
+    conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+    cur = conn.cursor()
+    cur.execute('set interactive_timeout=96*3600')
+    conn.select_db(db)
+except MySQLdb.Error, e:
+    print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+# 抽取待抓取的城市列表
+sqli0 = "select region_ch_name,region_id from map.map_region"
+num_city = cur.execute(sqli0)
+cities = cur.fetchmany(num_city)
+
+for city in cities:
+    print city[0],city[1]
 
 
 
