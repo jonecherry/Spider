@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # 数据表
     tb = 'temp'
     # 希望跳过抓取的城市
-    hulvcities = [2,3,4,]
+    hulvcities = [2,3,4,5,6,7,8]
 
     # 连接数据库
     try:
@@ -191,15 +191,14 @@ if __name__ == '__main__':
                             # 来源
                             source = 'qyer'
 
-                            print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称'+poi_en_name,'城市id' + str(region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '排名' + str(poi_rank),'地址'+poi_address,'电弧'+poi_telephone
 
                             sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
                             # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
                             sqli1 = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (poi_ch_name)
                             sqli2 = "select * from " + db + "." + tb + " where poi_en_name = " + "'%s'" % (poi_en_name)
-                            print '中文查询',sqli1
-                            print '英文查询',sqli2
+                            # print '中文查询',sqli1
+                            # print '英文查询',sqli2
                             try:
                                 r1 = cur.execute(sqli1)
                                 r2 = cur.execute(sqli2)
@@ -217,6 +216,7 @@ if __name__ == '__main__':
                                 pass
                             else:
                                 print '插入新POI... ...'
+                                print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '排名' + str(poi_rank), '地址' + poi_address, '电弧' + poi_telephone
                                 cur.execute(sqli,(poi_ch_name, poi_en_name, poi_loc_name, region_id, tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source))
                                 conn.commit()
                             print '------------------------------------------------'
