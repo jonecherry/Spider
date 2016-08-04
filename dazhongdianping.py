@@ -380,7 +380,7 @@ def url_to_selector(url):
 
 if __name__ == '__main__':
     # 设置白名单，过滤国家
-    chengshibaimingdan = [1,2,3,4,5]
+    chengshibaimingdan = [1]
     # 来源
     source = '大众点评'
     db = 'map'
@@ -424,21 +424,20 @@ if __name__ == '__main__':
                 pass
             else:
                 print '开始抓取', city
-                # url_food = 'http://www.dianping.com/'+city+'/food/p'
-                # url_shopping = 'http://www.dianping.com/'+city+'/shopping/p'
-                # url_jingdian = 'http://www.dianping.com/'+city+'/attraction?district=&category=&pageNum='
+                url_food = 'http://www.dianping.com/'+city+'/food/p'
+                url_shopping = 'http://www.dianping.com/'+city+'/shopping/p'
+                url_jingdian = 'http://www.dianping.com/'+city+'/attraction?district=&category=&pageNum='
                 url_jiudian = 'http://www.dianping.com/'+city+'/hotel/p'
-                urllist = [url_jiudian]
-                # urllist = [url_food,url_shopping,url_jingdian,url_jingdian]
+                urllist = [url_food,url_shopping,url_jingdian,url_jingdian]
                 for ui,url in enumerate(urllist):
                     if ui == 0:
-                        tag_id =2
-                    # elif ui == 1:
-                    #     tag_id = 4
-                    # elif ui == 2:
-                    #     tag_id = 3
-                    # elif ui == 3:
-                    #     tag_id = 2
+                        tag_id = 1
+                    elif ui == 1:
+                        tag_id = 4
+                    elif ui == 2:
+                        tag_id = 3
+                    elif ui == 3:
+                        tag_id = 2
                     else:
                         tag_id = ''
                     jiexi(url,tag_id)
