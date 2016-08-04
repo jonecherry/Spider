@@ -212,7 +212,7 @@ if __name__ == '__main__':
                                 if poi_ch_name =='':
                                     r1 = 0
                                 if poi_en_name == '':
-                                    r1 = 0
+                                    r2 = 0
                                 print '查询结果：'
                                 print '中文',r1,'英文',r2
 
