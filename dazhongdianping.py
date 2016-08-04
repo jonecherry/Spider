@@ -171,12 +171,16 @@ def jiexi(url,tag_id):
                             comments_count = qushuzi(comments_count)
                             print '评论数：', comments_count
                             # 评分
-                            poi_score = psp[2]
-                            for chi, ch in enumerate(poi_score):
-                                if ch.isdigit():
-                                    ni = chi
-                                    break
-                            poi_score = poi_score[ni:]
+                            try:
+                                poi_score = psp[2]
+                            except:
+                                poi_score = ''
+                            else:
+                                for chi, ch in enumerate(poi_score):
+                                    if ch.isdigit():
+                                        ni = chi
+                                        break
+                                poi_score = poi_score[ni:]
                             print '评分', poi_score
 
                             if r1 or r2:
@@ -184,7 +188,7 @@ def jiexi(url,tag_id):
                                 pass
                             else:
                                 print '新增POI... ...'
-                                print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电弧' + poi_telephone
+                                print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电话' + poi_telephone
                                 sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                                 cur.execute(sqli, (poi_ch_name, poi_en_name, poi_loc_name, poi_region_id, tag_id,poi_score, poi_address, poi_telephone,comments_count, source))
                                 conn.commit()
@@ -275,7 +279,7 @@ def jiexi(url,tag_id):
                                 pass
                             else:
                                 print '新增POI... ...'
-                                print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电弧' + poi_telephone
+                                print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电话' + poi_telephone
                                 sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                                 cur.execute(sqli, (poi_ch_name, poi_en_name, poi_loc_name, poi_region_id, tag_id, poi_score, poi_address,poi_telephone, comments_count, source))
                                 conn.commit()
@@ -380,7 +384,7 @@ def url_to_selector(url):
 
 if __name__ == '__main__':
     # 设置白名单，过滤国家
-    chengshibaimingdan = [1]
+    chengshibaimingdan = [1,2,3]
     # 来源
     source = '大众点评'
     db = 'map'
