@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # 数据表
     tb = 'map_poi'
     # 希望跳过抓取的城市
-    hulvcities = [2,3,]
+    hulvcities = range(1,12)
 
     # 连接数据库
     try:
@@ -221,7 +221,7 @@ if __name__ == '__main__':
                                     pass
                                 else:
                                     print '插入新POI... ...'
-                                    print '中文：' + poi_ch_name,type(poi_ch_name),'英文：' + poi_en_name,type(poi_en_name), '本地语言名称' + poi_en_name, '城市id' + str(region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '排名' + str(poi_rank), '地址' + poi_address,type(poi_address), '电话:' + poi_telephone,type(poi_telephone)
+                                    print '中文：' + poi_ch_name,'英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '排名' + str(poi_rank), '地址' + poi_address, '电话:' + poi_telephone
                                     cur.execute(sqli,(poi_ch_name, poi_en_name, poi_loc_name, region_id, tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source))
                                     conn.commit()
                                 print '------------------------------------------------'

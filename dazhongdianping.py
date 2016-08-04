@@ -384,7 +384,7 @@ def url_to_selector(url):
 
 if __name__ == '__main__':
     # 设置白名单，过滤国家
-    chengshibaimingdan = [1,2,3]
+    chengshibaimingdan = range(1,2)
     # 来源
     source = '大众点评'
     db = 'map'
@@ -421,30 +421,34 @@ if __name__ == '__main__':
             starturl = 'http://www.dianping.com/'+city+'/food/p1'
             starthtml = getsource(starturl)
             # print starthtml
-            startselector = etree.HTML(starthtml)
-            poiyeshu = startselector.xpath('//div[@class="Pages"]')
-            if len(poiyeshu)== 0:
-                print '城市',city,'在点评上没有数据'
+            try:
+                startselector = etree.HTML(starthtml)
+            except:
                 pass
             else:
-                print '开始抓取', city
-                url_food = 'http://www.dianping.com/'+city+'/food/p'
-                url_shopping = 'http://www.dianping.com/'+city+'/shopping/p'
-                url_jingdian = 'http://www.dianping.com/'+city+'/attraction?district=&category=&pageNum='
-                url_jiudian = 'http://www.dianping.com/'+city+'/hotel/p'
-                urllist = [url_food,url_shopping,url_jingdian,url_jingdian]
-                for ui,url in enumerate(urllist):
-                    if ui == 0:
-                        tag_id = 1
-                    elif ui == 1:
-                        tag_id = 4
-                    elif ui == 2:
-                        tag_id = 3
-                    elif ui == 3:
-                        tag_id = 2
-                    else:
-                        tag_id = ''
-                    jiexi(url,tag_id)
+                poiyeshu = startselector.xpath('//div[@class="Pages"]')
+                if len(poiyeshu)== 0:
+                    print '城市',city,'在点评上没有数据'
+                    pass
+                else:
+                    print '开始抓取', city
+                    url_food = 'http://www.dianping.com/'+city+'/food/p'
+                    url_shopping = 'http://www.dianping.com/'+city+'/shopping/p'
+                    url_jingdian = 'http://www.dianping.com/'+city+'/attraction?district=&category=&pageNum='
+                    url_jiudian = 'http://www.dianping.com/'+city+'/hotel/p'
+                    urllist = [url_food,url_shopping,url_jingdian,url_jingdian]
+                    for ui,url in enumerate(urllist):
+                        if ui == 0:
+                            tag_id = 1
+                        elif ui == 1:
+                            tag_id = 4
+                        elif ui == 2:
+                            tag_id = 3
+                        elif ui == 3:
+                            tag_id = 2
+                        else:
+                            tag_id = ''
+                        jiexi(url,tag_id)
 
     cur.close()
     conn.close()
