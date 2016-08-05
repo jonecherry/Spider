@@ -127,7 +127,7 @@ def jiexi(url,tag_id):
                         poi_ch_name = name
                         poi_en_name = ''
                     poi_loc_name = poi_en_name
-                    print '名称：',poi_ch_name,poi_en_name
+                    # print '名称：',poi_ch_name,poi_en_name
                     # 判断数据库是否已经存在该POI记录，决定是插入数据还是更新数据。
                     sqli_ch = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (poi_ch_name)
                     sqli_en = "select * from " + db + "." + tb + " where poi_en_name = " + "'%s'" % (poi_en_name)
@@ -160,16 +160,16 @@ def jiexi(url,tag_id):
                             poi_address2 = subselector.xpath('//span[@itemprop="street-address"]/@title')
                             poi_address2 = pankong(poi_address2)
                             poi_address = poi_address1 + poi_address2
-                            print '地址：', poi_address
+                            # print '地址：', poi_address
                             # 电话
                             poi_telephone = subselector.xpath('//span[@itemprop="tel"]/text()')
                             poi_telephone = pankong(poi_telephone)
-                            print '电话：', poi_telephone
+                            # print '电话：', poi_telephone
                             # 评论数
                             psp = subselector.xpath('//div[@class="brief-info"]/span/text()')
                             comments_count = pankong(psp)
                             comments_count = qushuzi(comments_count)
-                            print '评论数：', comments_count
+                            # print '评论数：', comments_count
                             # 评分
                             try:
                                 poi_score = psp[2]
@@ -181,14 +181,14 @@ def jiexi(url,tag_id):
                                         ni = chi
                                         break
                                 poi_score = poi_score[ni:]
-                            print '评分', poi_score
+                            # print '评分', poi_score
 
                             if r1 or r2:
                                 print '已经存在记录，更新数据... ...'
                                 pass
                             else:
                                 print '新增POI... ...'
-                                print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电话' + poi_telephone
+                                # print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电话' + poi_telephone
                                 sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                                 cur.execute(sqli, (poi_ch_name, poi_en_name, poi_loc_name, poi_region_id, tag_id,poi_score, poi_address, poi_telephone,comments_count, source))
                                 conn.commit()
@@ -252,16 +252,16 @@ def jiexi(url,tag_id):
                             poi_address2 = subselector.xpath('//span[@itemprop="street-address"]/@title')
                             poi_address2 = pankong(poi_address2)
                             poi_address = poi_address1 + poi_address2
-                            print '地址：', poi_address
+                            # print '地址：', poi_address
                             # 电话
                             poi_telephone = subselector.xpath('//span[@itemprop="tel"]/text()')
                             poi_telephone = pankong(poi_telephone)
-                            print '电话：', poi_telephone
+                            # print '电话：', poi_telephone
                             # 评论数
                             psp = subselector.xpath('//div[@class="brief-info"]/span/text()')
                             comments_count = pankong(psp)
                             comments_count = qushuzi(comments_count)
-                            print '评论数：', comments_count
+                            # print '评论数：', comments_count
                             # 评分
                             if not len(psp)==5:
                                 poi_score = ''
@@ -272,14 +272,14 @@ def jiexi(url,tag_id):
                                         ni = chi
                                         break
                                 poi_score = poi_score[ni:]
-                            print '评分', poi_score
+                            # print '评分', poi_score
 
                             if r1 :
                                 print '已经存在记录，更新数据... ...'
                                 pass
                             else:
                                 print '新增POI... ...'
-                                print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电话' + poi_telephone
+                                # print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电话' + poi_telephone
                                 sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                                 cur.execute(sqli, (poi_ch_name, poi_en_name, poi_loc_name, poi_region_id, tag_id, poi_score, poi_address,poi_telephone, comments_count, source))
                                 conn.commit()
@@ -364,12 +364,12 @@ def jiexi(url,tag_id):
                                     if dd.isdigit():
                                         comments = comments +dd
                                 comments_count = comments
-                            print '评论数：',comments_count
+                            # print '评论数：',comments_count
                             # 电话
                             poi_telephone = ''
 
                             print '新增POI... ...'
-                            print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电话' + poi_telephone
+                            # print '中文：' + poi_ch_name, '英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(poi_region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '地址' + poi_address, '电话' + poi_telephone
                             sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                             cur.execute(sqli, (poi_ch_name, poi_en_name, poi_loc_name, poi_region_id, tag_id, poi_score, poi_address,poi_telephone, comments_count, source))
                             conn.commit()
@@ -384,12 +384,12 @@ def url_to_selector(url):
 
 if __name__ == '__main__':
     # 设置白名单，过滤国家
-    chengshibaimingdan = range(1,2)
+    chengshibaimingdan = range(1,3)
     # 来源
     source = '大众点评'
     db = 'map'
     # 数据表
-    tb = 'map_poi1'
+    tb = 'map_poi_0'
     area = 'usa'
     # 标签id 美食：1，酒店：2，景点：3，购物：4，娱乐：5，交通：6
     if not os.path.exists('zhuaqu'):

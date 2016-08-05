@@ -25,7 +25,7 @@ if __name__ == '__main__':
     region_type = 2
     db = 'map'
     # 数据表
-    tb = 'map_region'
+    tb = 'map_region_0'
     # 连接数据库
     try:
         conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     # 需爬取得页数
     pagenum = pagenums[len(pagenums)-2]
 
-    for i in range(9, int(pagenum) + 1):
+    for i in range(1, int(pagenum) + 1):
         url = 'http://place.qyer.com/usa/citylist-0-0-%d'%(i)
         print url
         html = getsource(url)
