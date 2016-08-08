@@ -19,16 +19,20 @@ def getblock(source):
     return blocks
 
 if __name__ == '__main__':
-    starturl = 'http://place.qyer.com/usa/citylist-0-0-1/'
-    country_id = 1
-    parent_region_id = 1
+    country = 'japan'
+    # starturl = 'http://place.qyer.com/usa/citylist-0-0-1/'
+    starturl = 'http://place.qyer.com/'+country+'/citylist-0-0-1/'
+    print '起始页：',starturl
+    country_id = 519
+    parent_region_id = 519
     region_type = 2
     db = 'map'
     # 数据表
-    tb = 'map_region_0'
+    tb = 'map_region'
     # 连接数据库
     try:
-        conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        # conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        conn = MySQLdb.connect(host='172.22.185.78', user='root', passwd='123456', port=3306, charset='utf8')
         cur = conn.cursor()
         cur.execute('set interactive_timeout=96*3600')
         conn.select_db(db)
@@ -41,16 +45,16 @@ if __name__ == '__main__':
     pagenum = pagenums[len(pagenums)-2]
 
     for i in range(1, int(pagenum) + 1):
-        url = 'http://place.qyer.com/usa/citylist-0-0-%d'%(i)
-        print url
+        url = 'http://place.qyer.com/'+country+'/citylist-0-0-%d'%(i)
+        print '当前列表页：',url
         html = getsource(url)
         selector2 = etree.HTML(html)
         blocks = getblock(html)
         for j,block in enumerate(blocks):
-            print j
             selector1 = etree.HTML(block)
             city = selector1.xpath('//a/text()')[0].strip()
             cityenglishname = selector1.xpath('//span/text()')[0].strip()
+
             sub_url = selector1.xpath('//a/@href')[0]
 
             sub_html = getsource(sub_url)
@@ -72,6 +76,7 @@ if __name__ == '__main__':
             if num_result:
                 pass
             if not num_result:
+                print '城市', cityenglishname
                 cur.execute(sqli,(city, cityenglishname, cityenglishname, parent_region_id, country_id, region_type, pa_num))
                 conn.commit()
             print '------------------------------------------------'

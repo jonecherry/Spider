@@ -30,19 +30,19 @@ def pankong(poi_xx):
     return poi_xx
 
 if __name__ == '__main__':
-    starturl = 'http://place.qyer.com/usa/citylist-0-0-1/'
-    country_id = 1
-    parent_region_id = 1
-    region_type = 2
+    country = 'japan'
+    starturl = 'http://place.qyer.com/'+country+'/citylist-0-0-1/'
+
     db = 'map'
     # 数据表
-    tb = 'map_poi_0'
+    tb = 'map_poi'
     # 希望跳过抓取的城市
-    hulvcities = range(1,2)
+    hulvcities = range(1,520)
 
     # 连接数据库
     try:
-        conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        # conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        conn = MySQLdb.connect(host='172.22.185.78', user='root', passwd='123456', port=3306, charset='utf8')
         cur = conn.cursor()
         cur.execute('set interactive_timeout=96*3600')
         conn.select_db(db)
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     pagenum = pagenums[len(pagenums) - 2]
 
     for i in range(1, int(pagenum) + 1):
-        url = 'http://place.qyer.com/usa/citylist-0-0-%d' % (i)
+        url = 'http://place.qyer.com/'+country+'/citylist-0-0-%d' % (i)
         print url
         html = getsource(url)
         selector2 = etree.HTML(html)
