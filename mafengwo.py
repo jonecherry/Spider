@@ -248,26 +248,30 @@ if __name__ == '__main__':
                         si = k
                     if poinum[k] =='条':
                         ei = k
-                poinum = int(poinum[si+1:ei])
-                print 'poi数量:',poinum
-
-                if poinum < 750:
-                    yema = poinum / 15
+                try:
+                    poinum = int(poinum[si+1:ei])
+                except:
+                    pass
                 else:
-                    yema = 50
+                    print 'poi数量:',poinum
 
-                if yema == 0:
-                    print '----------%s 1页---------'%(city)
-                    url = 'http://www.mafengwo.cn/group/s.php?q=%s&p=%d&t=poi' % (city, 1)
-                    html = getsource(url)
-                    # jilu.write(html)
-                    jiexi(html)
-                else:
-                    for i in range(yema+1):
-                        url = 'http://www.mafengwo.cn/group/s.php?q=%s&p=%d&t=poi'%(city,i)
+                    if poinum < 750:
+                        yema = poinum / 15
+                    else:
+                        yema = 50
+
+                    if yema == 0:
+                        print '----------%s 1页---------'%(city)
+                        url = 'http://www.mafengwo.cn/group/s.php?q=%s&p=%d&t=poi' % (city, 1)
                         html = getsource(url)
                         # jilu.write(html)
                         jiexi(html)
+                    else:
+                        for i in range(yema+1):
+                            url = 'http://www.mafengwo.cn/group/s.php?q=%s&p=%d&t=poi'%(city,i)
+                            html = getsource(url)
+                            # jilu.write(html)
+                            jiexi(html)
 
     cur.close()
     conn.close()

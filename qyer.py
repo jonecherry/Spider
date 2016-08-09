@@ -24,20 +24,20 @@ def getpoiblock(source):
 # 对匹配为空进行处理
 def pankong(poi_xx):
     if len(poi_xx)==0:
-        pass
+        poi_xx = ''
     else:
         poi_xx = poi_xx[0]
     return poi_xx
 
 if __name__ == '__main__':
-    country = 'japan'
+    country = 'south-korea'
     starturl = 'http://place.qyer.com/'+country+'/citylist-0-0-1/'
 
     db = 'map'
     # 数据表
     tb = 'map_poi'
     # 希望跳过抓取的城市
-    hulvcities = range(1,520)
+    hulvcities = range(1,792)
 
     # 连接数据库
     try:
@@ -147,84 +147,83 @@ if __name__ == '__main__':
                                 # 详情页url
                                 xiangqingurl = dangqianselector.xpath('//h3[@class="title fontYaHei"]/a/@href')[0]
                                 print '详情页',xiangqingurl
-                                xiangqinghtml = getsource(xiangqingurl)
-                                xiangqingselector = etree.HTML(xiangqinghtml)
-                                poi_tips_biaoti = xiangqingselector.xpath('//div[@class="poiDet-main"]/ul[@class="poiDet-tips"]/li/span/text()')
-                                biaotilist = []
-                                for tipi,biaoti in enumerate(poi_tips_biaoti):
-                                    biaoti = biaoti.strip()
-                                    biaotilist.append(biaoti)
-
-                                for ti,biaoti in enumerate(biaotilist):
-                                    if biaoti =='':
-                                        biaotilist.pop(ti)
-                                for bi,biaoti in enumerate(biaotilist):
-                                    if biaoti == '地址：':
-                                        addi = bi + 1
-                                    if biaoti == '电话：':
-                                        telei = bi + 1
-                                if '地址：'in biaotilist:
-                                    # 地址
-                                    xpath_str_add = "//ul[@class='poiDet-tips']/li["+str(addi)+"]/div/p/text()"
-                                    poi_address = xiangqingselector.xpath(xpath_str_add)
-                                    poi_address = pankong(poi_address)
-                                else:
-                                    poi_address = ''
-
-                                if '电话：'in biaotilist:
-                                    # 电话
-                                    xpath_str_tele = "//ul[@class='poiDet-tips']/li[" + str(telei) + "]/div/p/text()"
-                                    poi_telephone = xiangqingselector.xpath(xpath_str_tele)
-                                    poi_telephone = pankong(poi_telephone)
-                                    if not poi_telephone:
-                                        poi_telephone = ''
-                                else:
-                                    poi_telephone = ''
-                                # 评论数
-                                pinglunshu = dangqianselector.xpath('//div[@class="info"]/span[@class="dping"]/a/text()')
-                                if len(pinglunshu)==0:
-                                    pinglunshu =''
-                                else:
-                                    pinglunshu = pinglunshu[0]
-
-                                comments_count = pinglunshu.strip()
-                                newstr1 = ''
-                                for sr1 in comments_count:
-                                    if sr1.isdigit():
-                                        newstr1 = newstr1 + sr1
-                                comments_count = newstr1
-                                # 来源
-                                source = 'qyer'
-
-
-                                sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-
-                                # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
-                                sqli1 = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (poi_ch_name)
-                                sqli2 = "select * from " + db + "." + tb + " where poi_en_name = " + "'%s'" % (poi_en_name)
-                                # print '中文查询',sqli1
-                                # print '英文查询',sqli2
                                 try:
-                                    r1 = cur.execute(sqli1)
-                                    r2 = cur.execute(sqli2)
+                                    xiangqinghtml = getsource(xiangqingurl)
                                 except:
                                     pass
-                                if poi_ch_name =='':
-                                    r1 = 0
-                                if poi_en_name == '':
-                                    r2 = 0
-                                print '查询结果：'
-                                print '中文',r1,'英文',r2
-
-                                if r1 or r2:
-                                    print '已经存在记录，迭代数据 ... ...'
-                                    pass
                                 else:
-                                    print '插入新POI... ...'
-                                    # print '中文：' + poi_ch_name,'英文：' + poi_en_name, '本地语言名称' + poi_en_name, '城市id' + str(region_id), '类型：' + str(tag_id), '评论数' + str(comments_count), '评分' + str(poi_score), '排名' + str(poi_rank), '地址' + poi_address, '电话:' + poi_telephone
-                                    cur.execute(sqli,(poi_ch_name, poi_en_name, poi_loc_name, region_id, tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source))
-                                    conn.commit()
-                                print '------------------------------------------------'
+                                    xiangqingselector = etree.HTML(xiangqinghtml)
+                                    poi_tips_biaoti = xiangqingselector.xpath('//div[@class="poiDet-main"]/ul[@class="poiDet-tips"]/li/span/text()')
+                                    biaotilist = []
+                                    for tipi,biaoti in enumerate(poi_tips_biaoti):
+                                        biaoti = biaoti.strip()
+                                        biaotilist.append(biaoti)
+
+                                    for ti,biaoti in enumerate(biaotilist):
+                                        if biaoti =='':
+                                            biaotilist.pop(ti)
+                                    for bi,biaoti in enumerate(biaotilist):
+                                        if biaoti == '地址：':
+                                            addi = bi + 1
+                                        if biaoti == '电话：':
+                                            telei = bi + 1
+                                    if '地址：'in biaotilist:
+                                        # 地址
+                                        xpath_str_add = "//ul[@class='poiDet-tips']/li["+str(addi)+"]/div/p/text()"
+                                        poi_address = xiangqingselector.xpath(xpath_str_add)
+                                        poi_address = pankong(poi_address)
+                                    else:
+                                        poi_address = ''
+
+                                    if '电话：'in biaotilist:
+                                        # 电话
+                                        xpath_str_tele = "//ul[@class='poiDet-tips']/li[" + str(telei) + "]/div/p/text()"
+                                        poi_telephone = xiangqingselector.xpath(xpath_str_tele)
+                                        poi_telephone = pankong(poi_telephone)
+                                        if not poi_telephone:
+                                            poi_telephone = ''
+                                    else:
+                                        poi_telephone = ''
+                                    # 评论数
+                                    pinglunshu = dangqianselector.xpath('//div[@class="info"]/span[@class="dping"]/a/text()')
+                                    if len(pinglunshu)==0:
+                                        pinglunshu =''
+                                    else:
+                                        pinglunshu = pinglunshu[0]
+
+                                    comments_count = pinglunshu.strip()
+                                    newstr1 = ''
+                                    for sr1 in comments_count:
+                                        if sr1.isdigit():
+                                            newstr1 = newstr1 + sr1
+                                    comments_count = newstr1
+                                    # 来源
+                                    source = 'qyer'
+                                    sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+
+                                    # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
+                                    sqli1 = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (poi_ch_name)
+                                    sqli2 = "select * from " + db + "." + tb + " where poi_en_name = " + "'%s'" % (poi_en_name)
+                                    # print '中文查询',sqli1
+                                    # print '英文查询',sqli2
+                                    try:
+                                        r1 = cur.execute(sqli1)
+                                        r2 = cur.execute(sqli2)
+                                    except:
+                                        pass
+                                    if poi_ch_name =='':
+                                        r1 = 0
+                                    if poi_en_name == '':
+                                        r2 = 0
+                                    print '查询结果：','中文',r1,'英文',r2
+                                    if r1 or r2:
+                                        print '已经存在记录，迭代数据 ... ...'
+                                        pass
+                                    else:
+                                        print '插入新POI... ...'
+                                        cur.execute(sqli,(poi_ch_name, poi_en_name, poi_loc_name, region_id, tag_id,poi_score,poi_rank,poi_address,poi_telephone,comments_count,source))
+                                        conn.commit()
+                                    print '------------------------------------------------'
     cur.close()
     conn.close()
     print '------------finished--------------'

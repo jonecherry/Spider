@@ -19,20 +19,21 @@ def getblock(source):
     return blocks
 
 if __name__ == '__main__':
-    country = 'japan'
+    countries = ['singapore','south-korea']
+    country = countries[0]
     # starturl = 'http://place.qyer.com/usa/citylist-0-0-1/'
     starturl = 'http://place.qyer.com/'+country+'/citylist-0-0-1/'
     print '起始页：',starturl
-    country_id = 519
-    parent_region_id = 519
+    country_id = 826
+    parent_region_id = 826
     region_type = 2
     db = 'map'
     # 数据表
     tb = 'map_region'
     # 连接数据库
     try:
-        # conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
-        conn = MySQLdb.connect(host='172.22.185.78', user='root', passwd='123456', port=3306, charset='utf8')
+        conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        # conn = MySQLdb.connect(host='172.22.185.78', user='root', passwd='123456', port=3306, charset='utf8')
         cur = conn.cursor()
         cur.execute('set interactive_timeout=96*3600')
         conn.select_db(db)
@@ -67,7 +68,7 @@ if __name__ == '__main__':
             # print pa_num
 
 
-            sqli = "INSERT INTO " + db + "." + tb + "(region_ch_name,region_en_name,region_loc_name,parent_region_id,country_id,region_type,visited_count)" + " VALUES(%s,%s,%s,%s,%s,%s,%s)"
+            sqli = "INSERT INTO " + db + "." + tb + "(region_ch_name,region_en_name,parent_region_id,country_id,region_type,visited_count)" + " VALUES(%s,%s,%s,%s,%s,%s)"
 
             # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
             sqli1 = "select * from "+db+"."+tb+" where region_ch_name = "+"'%s'"%(city)
@@ -77,7 +78,7 @@ if __name__ == '__main__':
                 pass
             if not num_result:
                 print '城市', cityenglishname
-                cur.execute(sqli,(city, cityenglishname, cityenglishname, parent_region_id, country_id, region_type, pa_num))
+                cur.execute(sqli,(city, cityenglishname, parent_region_id, country_id, region_type, pa_num))
                 conn.commit()
             print '------------------------------------------------'
     cur.close()

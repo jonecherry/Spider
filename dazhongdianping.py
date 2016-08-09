@@ -6,6 +6,7 @@ import sys
 import MySQLdb
 import re
 import random
+import time
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
@@ -27,7 +28,7 @@ def getsource(url):
       {'User-Agent':'Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11'},
       {'User-Agent':'Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11'},
       {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11'},
-      {'User-Agent':'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; TencentTraveler 4.0)'}]
+      {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'}]
     html = requests.get(url,headers = headlist[random.randint(0,10)])
     html.encoding = 'utf-8'
     return html.text
@@ -151,7 +152,7 @@ def jiexi(url,tag_id):
                             suburl = selector.xpath('//a[@class="BL"]/@href')[0]
                             suburl = 'http://www.dianping.com'+suburl
                             print '详情链接', suburl
-
+                            time.sleep(1)
                             subhtml = getsource(suburl)
                             subselector = etree.HTML(subhtml)
                             # 地址
@@ -242,7 +243,7 @@ def jiexi(url,tag_id):
                             suburl = selector.xpath('//div[@class="poi-title"]/h4/a/@href')[0]
                             suburl = 'http://www.dianping.com'+suburl
                             print '详情链接', suburl
-
+                            time.sleep(1)
                             subhtml = getsource(suburl)
                             subselector = etree.HTML(subhtml)
 
@@ -304,6 +305,7 @@ def jiexi(url,tag_id):
                     suburl = selector.xpath('//h2[@class="hotel-name"]/a/@href')[0]
                     suburl = 'http://www.dianping.com' + suburl
                     print '详情链接', suburl
+                    time.sleep(1)
                     subhtml = getsource(suburl)
                     subselector = etree.HTML(subhtml)
                     # 中文名称、英文名称、本地名称
@@ -384,13 +386,12 @@ def url_to_selector(url):
 
 if __name__ == '__main__':
     # 设置白名单，过滤国家
-    chengshibaimingdan = range(1,3)
+    chengshibaimingdan = range(1,826)
     # 来源
     source = '大众点评'
     db = 'map'
     # 数据表
-    tb = 'map_poi_0'
-    area = 'usa'
+    tb = 'map_poi'
     # 标签id 美食：1，酒店：2，景点：3，购物：4，娱乐：5，交通：6
     if not os.path.exists('zhuaqu'):
         os.mkdir('zhuaqu')
@@ -399,7 +400,8 @@ if __name__ == '__main__':
     jilu = open(os.path.join('zhuaqu',tb,'jilu.txt'),'a')
     # 连接数据库
     try:
-        conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        # conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        conn = MySQLdb.connect(host='172.22.185.78', user='root', passwd='123456', port=3306, charset='utf8')
         cur = conn.cursor()
         cur.execute('set interactive_timeout=96*3600')
         conn.select_db(db)
