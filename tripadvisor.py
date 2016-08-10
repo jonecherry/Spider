@@ -59,10 +59,28 @@ def pankong(poi_xx):
     else:
         poi_xx = poi_xx[0]
     return poi_xx
-def yemianjiexi(selecotor,ci):
+def tiaoguo(selector):
+    city = selector.xpath('//li[@class="cityName tabItem dropDown hvrIE6"]/span/span/text()')
+    city = pankong(city)
+    # 对应的城市id
+    sqli = "select region_id from " + db + ".map_region" + " where region_ch_name = " + "'%s'" % (city)
+    num_result = cur.execute(sqli)
+    if not num_result:
+        region_id = ''
+    else:
+        region_id = cur.fetchmany(1)
+        region_id = region_id[0][0]
+
+    # 过滤已经抓取完成的城市
+    if region_id in hulvcities:
+        return region_id,True
+    else:
+        return region_id,False
+def yemianjiexi(selector,ci):
+
     if ci == 0:
         # 详情页url
-        xiangqingurl = dangqianselector.xpath('//div[@class="listing_title"]/a/@href')[0]
+        xiangqingurl = selector.xpath('//div[@class="listing_title"]/a/@href')[0]
         xiangqingurl = starturl + xiangqingurl
         print '详情页', xiangqingurl
         xiangqinghtml = getsource(xiangqingurl)
@@ -70,8 +88,9 @@ def yemianjiexi(selecotor,ci):
         xiangqingselector = etree.HTML(xiangqinghtml)
 
         # 名称
-        name0 = xiangqingselector.xpath('//h1[@id="HEADING"]/text()')
+        name0 = selector.xpath('//div[@class="listing_title"]/a/text()')
         name0 = pankong(name0)
+
         name1 = xiangqingselector.xpath('//span[@class="altHead"]/text()')
         name1 = pankong(name1)
         shouzimu0 = name0[0].encode('utf-8')
@@ -89,33 +108,36 @@ def yemianjiexi(selecotor,ci):
             else:
                 poi_en_name = name1
                 poi_ch_name = name0
-        print '中文：',len(poi_ch_name)
+
         poi_loc_name = poi_en_name
 
         comments_count = xiangqingselector.xpath('//a[@class="more taLnk"]/@content')
         comments_count = pankong(comments_count)
         poi_rank = xiangqingselector.xpath('//b[@class="rank"]/text()')
         poi_rank = pankong(poi_rank)
-        if not poi_rank:
+        if poi_rank:
             poi_rank = qushuzi(poi_rank)
-        poi_telephone = xiangqingselector.xpath('//div[@class="f1"]/text()')
+        poi_telephone = xiangqingselector.xpath('//div[@class="fl"]')
         poi_telephone = pankong(poi_telephone)
         # 地址
         street_address = xiangqingselector.xpath('//span[@class="street-address"]/text()')
         street_address = pankong(street_address)
 
-        addresslocality = xiangqingselector.xpath('//span[@class="addressLocality"]/text()')
+        extended_address = xiangqingselector.xpath('//span[@class="extended-address"]/text()')
+        extended_address = pankong(extended_address)
+
+        addresslocality = xiangqingselector.xpath('//span[@property="addressLocality"]/text()')
         addresslocality = pankong(addresslocality)
 
-        addressregion = xiangqingselector.xpath('//span[@class="addressRegion"]/text()')
+        addressregion = xiangqingselector.xpath('//span[@property="addressRegion"]/text()')
         addressregion = pankong(addressregion)
 
-        postcode = xiangqingselector.xpath('//span[@class="postalCode"]/text()')
+        postcode = xiangqingselector.xpath('//span[@property="postalCode"]/text()')
         postcode = pankong(postcode)
-        poi_address = street_address+','+addresslocality+','+addressregion+postcode
+
     elif ci == 1:
         # 详情页url
-        xiangqingurl = dangqianselector.xpath('//div[@class="property_title]/a/@href')[0]
+        xiangqingurl = selector.xpath('//div[@class="property_title]/a/@href')[0]
         xiangqingurl = starturl + xiangqingurl
         print '详情页', xiangqingurl
         xiangqinghtml = getsource(xiangqingurl)
@@ -123,7 +145,7 @@ def yemianjiexi(selecotor,ci):
         xiangqingselector = etree.HTML(xiangqinghtml)
 
         # 名称
-        name0 = xiangqingselector.xpath('//h1[@id="HEADING"]/text()')
+        name0 = selector.xpath('//div[@class="listing_title"]/a/text()')
         name0 = pankong(name0)
         name1 = xiangqingselector.xpath('//span[@class="altHead"]/text()')
         name1 = pankong(name1)
@@ -148,16 +170,16 @@ def yemianjiexi(selecotor,ci):
         comments_count = pankong(comments_count)
         poi_rank = xiangqingselector.xpath('//b[@class="rank_text wrap"]/span/text()')
         poi_rank = pankong(poi_rank)
-        if not poi_rank:
+        if poi_rank:
             poi_rank = qushuzi(poi_rank)
-        poi_telephone = xiangqingselector.xpath('//div[@class="phoneNumber"]/text()')
-        poi_telephone = pankong(poi_telephone)
-        if not poi_telephone:
-            for i,ch in enumerate(poi_telephone):
-                if ch == '：':
-                    tempi = i
-                    break
-            poi_telephone = poi_telephone[tempi+1:]
+        # poi_telephone = xiangqingselector.xpath('//div[@class="phoneNumber"]/text()')
+        # poi_telephone = pankong(poi_telephone)
+        # if not poi_telephone:
+        #     for i,ch in enumerate(poi_telephone):
+        #         if ch == '：':
+        #             tempi = i
+        #             break
+        #     poi_telephone = poi_telephone[tempi+1:]
 
         # 地址
         street_address = xiangqingselector.xpath('//span[@class="street-address"]/text()')
@@ -166,18 +188,18 @@ def yemianjiexi(selecotor,ci):
         extended_address = xiangqingselector.xpath('//span[@class="extended-address"]/text()')
         extended_address = pankong(extended_address)
 
-        addresslocality = xiangqingselector.xpath('//span[@class="addressLocality"]/text()')
+        addresslocality = xiangqingselector.xpath('//span[@property="addressLocality"]/text()')
         addresslocality = pankong(addresslocality)
 
-        addressregion = xiangqingselector.xpath('//span[@class="addressRegion"]/text()')
+        addressregion = xiangqingselector.xpath('//span[@property="addressRegion"]/text()')
         addressregion = pankong(addressregion)
 
-        postcode = xiangqingselector.xpath('//span[@class="postalCode"]/text()')
+        postcode = xiangqingselector.xpath('//span[@property="postalCode"]/text()')
         postcode = pankong(postcode)
-        poi_address = street_address + ','+extended_address+',' + addresslocality + ',' + addressregion + postcode
+
     elif ci == 2:
         # 详情页url
-        xiangqingurl = dangqianselector.xpath('//h3[@class="title]/a/@href')[0]
+        xiangqingurl = selector.xpath('//h3[@class="title]/a/@href')[0]
         xiangqingurl = starturl + xiangqingurl
         print '详情页', xiangqingurl
         xiangqinghtml = getsource(xiangqingurl)
@@ -185,7 +207,7 @@ def yemianjiexi(selecotor,ci):
         xiangqingselector = etree.HTML(xiangqinghtml)
 
         # 名称
-        name0 = xiangqingselector.xpath('//h1[@id="HEADING"]/text()')
+        name0 = selector.xpath('//div[@class="listing_title"]/a/text()')
         name0 = pankong(name0)
         name1 = xiangqingselector.xpath('//span[@class="altHead"]/text()')
         name1 = pankong(name1)
@@ -210,36 +232,46 @@ def yemianjiexi(selecotor,ci):
         comments_count = pankong(comments_count)
         poi_rank = xiangqingselector.xpath('//b[@class="rank_text wrap"]/span/text()')
         poi_rank = pankong(poi_rank)
-        if not poi_rank:
+        if poi_rank:
             poi_rank = qushuzi(poi_rank)
-        poi_telephone = xiangqingselector.xpath('//div[@class="f1 phoneNumber"]/text()')
+        poi_telephone = xiangqingselector.xpath('//div[@class="fl phoneNumber"]/text()')
         poi_telephone = pankong(poi_telephone)
 
         # 地址
         street_address = xiangqingselector.xpath('//span[@class="street-address"]/text()')
         street_address = pankong(street_address)
 
-        addresslocality = xiangqingselector.xpath('//span[@class="addressLocality"]/text()')
+        extended_address = xiangqingselector.xpath('//span[@class="extended-address"]/text()')
+        extended_address = pankong(extended_address)
+
+        addresslocality = xiangqingselector.xpath('//span[@property="addressLocality"]/text()')
         addresslocality = pankong(addresslocality)
 
-        addressregion = xiangqingselector.xpath('//span[@class="addressRegion"]/text()')
+        addressregion = xiangqingselector.xpath('//span[@property="addressRegion"]/text()')
         addressregion = pankong(addressregion)
 
-        postcode = xiangqingselector.xpath('//span[@class="postalCode"]/text()')
+        postcode = xiangqingselector.xpath('//span[@property="postalCode"]/text()')
         postcode = pankong(postcode)
+
+    if extended_address:
+        poi_address = street_address + ',' + extended_address+','+addresslocality + ',' + addressregion + postcode
+    else:
         poi_address = street_address + ',' + addresslocality + ',' + addressregion + postcode
-    return poi_ch_name,poi_en_name,poi_loc_name,poi_telephone,poi_address,poi_rank,comments_count
+
+    poi_telephone = ''
+    return xiangqingselector,poi_ch_name,poi_en_name,poi_loc_name,poi_telephone,poi_address,poi_rank,comments_count
 
 if __name__ == '__main__':
-    country = 'japan'
+
     starturl = 'http://www.tripadvisor.cn'
-    tingliu = 4
+    tingliu = 3
     db = 'map'
     # 数据表
-    tb = 'map_poi3'
+    tb = 'map_poi4'
     # 希望跳过抓取的城市
     hulvcities = range(1,2)
-
+    # 来源
+    source = 'tripadvisor'
     # 连接数据库
     try:
         conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
@@ -250,38 +282,27 @@ if __name__ == '__main__':
     except MySQLdb.Error, e:
         print "Mysql Error %d: %s" % (e.args[0], e.args[1])
 
-    for i in range(0,51):
+    for i in range(3,51):
         url = 'http://www.tripadvisor.cn/TourismChildrenAjax?geo=191&offset=%d&desktop=true'% (i)
         print '城市列表页：',url
         html = getsource(url)
         time.sleep(tingliu)
-        selector2 = etree.HTML(html)
         blocks = getcityblock(html)
         for j, block in enumerate(blocks):
             selector1 = etree.HTML(block)
-            city = selector1.xpath('//span[@class="name"]/text()')[0].strip()
 
-            # 对应的城市id
-            sqli1 = "select region_id from " + db + ".map_region" + " where region_ch_name = " + "'%s'" % (city)
-            num_result = cur.execute(sqli1)
-            if not num_result:
-                region_id = ''
-            else:
-                region_id = cur.fetchmany(1)
-                region_id = region_id[0][0]
+            # 城市主页
+            sub_url = selector1.xpath('//a/@href')[0]
+            zhuye_url = starturl+sub_url
+            print '城市主页：',zhuye_url
+            zhuye_html = getsource(zhuye_url)
+            time.sleep(tingliu)
+            zhuye_selector = etree.HTML(zhuye_html)
 
-            # 过滤已经抓取完成的城市
-            if region_id in hulvcities:
-                print city, '已经完成抓取，跳过'
+            region_id, tiaoma = tiaoguo(zhuye_selector)
+            if tiaoma:
                 pass
             else:
-                # 城市主页
-                sub_url = selector1.xpath('//a/@href')[0]
-                zhuye_url = starturl+sub_url
-                print '城市主页：',zhuye_url
-                zhuye_html = getsource(zhuye_url)
-                time.sleep(tingliu)
-                zhuye_selector = etree.HTML(zhuye_html)
                 hotel_url = zhuye_selector.xpath('//li[@class="hotels twoLines"]/a/@href')[0]
                 jingdian_url = zhuye_selector.xpath('//li[@class="attractions twoLines"]/a/@href')[0]
                 canting_url = zhuye_selector.xpath('//li[@class="restaurants twoLines"]/a/@href')[0]
@@ -325,16 +346,14 @@ if __name__ == '__main__':
                         for poiblock in poiblocks:
                             dangqianselector = etree.HTML(poiblock)
 
-                            poi_ch_name, poi_en_name, poi_loc_name, poi_telephone, poi_address, poi_rank,comments_count = yemianjiexi(dangqianselector,ci)
-
-                            # 来源
-                            source = 'tripadvisor'
+                            xiangqingselector,poi_ch_name, poi_en_name, poi_loc_name, poi_telephone, poi_address, poi_rank,comments_count = yemianjiexi(dangqianselector,ci)
 
                             sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_tag_id,poi_rank,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
                             # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
                             sqli1 = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (poi_ch_name)
                             sqli2 = "select * from " + db + "." + tb + " where poi_en_name = " + "'%s'" % (poi_en_name)
+
                             try:
                                 r1 = cur.execute(sqli1)
                                 r2 = cur.execute(sqli2)
