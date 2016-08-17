@@ -30,7 +30,7 @@ def pankong(poi_xx):
     return poi_xx
 
 if __name__ == '__main__':
-    countries = ['canada', 'mexico']
+    countries = ['cuba']
 
     for country in countries:
         starturl = 'http://place.qyer.com/'+country+'/citylist-0-0-1/'
@@ -38,7 +38,7 @@ if __name__ == '__main__':
         # 数据表
         tb = 'map_poi'
         # 希望跳过抓取的城市
-        hulvcities = range(1,917)
+        hulvcities = range(1,1049)
         hulvcities.append(987)
         hulvcities.append(915)
 

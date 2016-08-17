@@ -1,39 +1,48 @@
 #coding=utf-8
 import requests
 import os
+import proxyIP
+import random
 import MySQLdb
 from lxml import etree
 import re
+import urllib2
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
 #getsource用来获取网页源代码
 def getsource(url):
+
     html = requests.get(url)
     html.encoding = 'utf-8'
     return html.text
+def getit(url):
+    proxy_handle = urllib2.ProxyHandler({'http': random.choice(proxyIP.proxy_list)})
+    opener = urllib2.build_opener(proxy_handle)
+    urllib2.install_opener(opener)
+    response = urllib2.urlopen(url)
+    return response
 #获取信息块
 def getblock(source):
     blocks = re.findall('(<h3 class="title fontYaHei".*?</h3>)',source,re.S)
     return blocks
 
 if __name__ == '__main__':
-    countries = ['singapore','south-korea']
+    countries = ['cuba','mexico','canada','thailand','singapore','south-korea','usa']
     country = countries[0]
-    # starturl = 'http://place.qyer.com/usa/citylist-0-0-1/'
     starturl = 'http://place.qyer.com/'+country+'/citylist-0-0-1/'
     print '起始页：',starturl
-    country_id = 826
-    parent_region_id = 826
+    country_id = 1048
+    parent_region_id = 1048
     region_type = 2
     db = 'map'
     # 数据表
     tb = 'map_region'
     # 连接数据库
     try:
-        conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
-        # conn = MySQLdb.connect(host='172.22.185.78', user='root', passwd='123456', port=3306, charset='utf8')
+        # conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        conn = MySQLdb.connect(host='172.22.185.130', user='root', passwd='123456', port=3306, charset='utf8')
         cur = conn.cursor()
         cur.execute('set interactive_timeout=96*3600')
         conn.select_db(db)
@@ -66,7 +75,6 @@ if __name__ == '__main__':
             else:
                 pa_num = pa_num[0]
             # print pa_num
-
 
             sqli = "INSERT INTO " + db + "." + tb + "(region_ch_name,region_en_name,parent_region_id,country_id,region_type,visited_count)" + " VALUES(%s,%s,%s,%s,%s,%s)"
 

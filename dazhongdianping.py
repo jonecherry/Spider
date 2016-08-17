@@ -152,7 +152,7 @@ def jiexi(url,tag_id):
                             suburl = selector.xpath('//a[@class="BL"]/@href')[0]
                             suburl = 'http://www.dianping.com'+suburl
                             print '详情链接', suburl
-                            time.sleep(1)
+                            time.sleep(tingliu)
                             subhtml = getsource(suburl)
                             subselector = etree.HTML(subhtml)
                             # 地址
@@ -243,7 +243,7 @@ def jiexi(url,tag_id):
                             suburl = selector.xpath('//div[@class="poi-title"]/h4/a/@href')[0]
                             suburl = 'http://www.dianping.com'+suburl
                             print '详情链接', suburl
-                            time.sleep(1)
+                            time.sleep(tingliu)
                             subhtml = getsource(suburl)
                             subselector = etree.HTML(subhtml)
 
@@ -305,7 +305,7 @@ def jiexi(url,tag_id):
                     suburl = selector.xpath('//h2[@class="hotel-name"]/a/@href')[0]
                     suburl = 'http://www.dianping.com' + suburl
                     print '详情链接', suburl
-                    time.sleep(1)
+                    time.sleep(tingliu)
                     subhtml = getsource(suburl)
                     subselector = etree.HTML(subhtml)
                     # 中文名称、英文名称、本地名称
@@ -391,7 +391,8 @@ if __name__ == '__main__':
     source = '大众点评'
     db = 'map'
     # 数据表
-    tb = 'map_poi'
+    tb = 'map_poi1'
+    tingliu = 5
     # 标签id 美食：1，酒店：2，景点：3，购物：4，娱乐：5，交通：6
     if not os.path.exists('zhuaqu'):
         os.mkdir('zhuaqu')
@@ -400,8 +401,8 @@ if __name__ == '__main__':
     jilu = open(os.path.join('zhuaqu',tb,'jilu.txt'),'a')
     # 连接数据库
     try:
-        # conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
-        conn = MySQLdb.connect(host='172.22.185.78', user='root', passwd='123456', port=3306, charset='utf8')
+        conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='123456', port=3306, charset='utf8')
+        # conn = MySQLdb.connect(host='172.22.185.78', user='root', passwd='123456', port=3306, charset='utf8')
         cur = conn.cursor()
         cur.execute('set interactive_timeout=96*3600')
         conn.select_db(db)
