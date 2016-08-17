@@ -95,7 +95,7 @@ def yemianjiexi(block,ci):
 
         xiangqingurl = selector.xpath('//div[@class="listing_title"]/a/@href')[0]
         xiangqingurl = starturl + xiangqingurl
-        print '详情页', xiangqingurl
+        # print '详情页', xiangqingurl
         try:
             xiangqinghtml = getsource(xiangqingurl)
         except:
@@ -157,7 +157,7 @@ def yemianjiexi(block,ci):
         # 详情页url
         xiangqingurl = selector.xpath('//div[@class="property_title"]/a/@href')[0]
         xiangqingurl = starturl + xiangqingurl
-        print '详情页', xiangqingurl
+        # print '详情页', xiangqingurl
         try:
             xiangqinghtml = getsource(xiangqingurl)
         except:
@@ -226,7 +226,7 @@ def yemianjiexi(block,ci):
         # 详情页url
         xiangqingurl = selector.xpath('//a[@class="property_title"]/@href')[0]
         xiangqingurl = starturl + xiangqingurl
-        print '详情页', xiangqingurl
+        # print '详情页', xiangqingurl
         try:
             xiangqinghtml = getsource(xiangqingurl)
         except:
@@ -287,6 +287,8 @@ if __name__ == '__main__':
     tb = 'map_poi'
     # 希望跳过抓取的城市
     hulvcities = range(1,2)
+    # 跳过多少个城市
+    num_tiao = 3
     # 来源
     source = 'tripadvisor'
     # 连接数据库
@@ -299,15 +301,20 @@ if __name__ == '__main__':
     except MySQLdb.Error, e:
         print "Mysql Error %d: %s" % (e.args[0], e.args[1])
 
-    for i in range(0,51):
+    for i in range(2,51):
         # 城市列表页
         # url = 'http://www.tripadvisor.cn/TourismChildrenAjax?geo=191&offset=%d&desktop=true'% (i)
         url = 'http://www.tripadvisor.cn/TourismChildrenAjax?geo=150768&offset=%d&desktop=true' % (i)
         print '城市列表页：',url
         html = getsource(url)
         time.sleep(tingliu)
-        blocks = getcityblock(html)
+        blocks = getcityblock(html)# 设置当前列表页跳过前面多少个城市
+
         for j, block in enumerate(blocks):
+            if num_tiao == 0:
+                pass
+            elif num_tiao>j:
+                continue
             selector1 = etree.HTML(block)
 
             # 城市主页
@@ -362,40 +369,43 @@ if __name__ == '__main__':
                         poiblocks = getpoiblock(dangqianhtml,ci)
                         print '当前页的poi数',len(poiblocks)
                         for poiblock in poiblocks:
-
-                            tiaoguopoi,xiangqingselector,poi_ch_name, poi_en_name, poi_loc_name, poi_telephone, poi_address, poi_rank,comments_count = yemianjiexi(poiblock,ci)
-                            # tiaoguopoi为poi详情页获取阶段，异常获取标志。若获取异常，tiaoguopoi为1，跳过该poi
-                            if tiaoguopoi:
+                            try:
+                                tiaoguopoi,xiangqingselector,poi_ch_name, poi_en_name, poi_loc_name, poi_telephone, poi_address, poi_rank,comments_count = yemianjiexi(poiblock,ci)
+                            except:
                                 pass
                             else:
-                                sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_region,poi_tag_id,poi_rank,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-
-                                # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
-                                sqli1 = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (poi_ch_name)
-                                sqli2 = "select * from " + db + "." + tb + " where poi_en_name = " + "'%s'" % (poi_en_name)
-
-                                try:
-                                    r1 = cur.execute(sqli1)
-                                    r2 = cur.execute(sqli2)
-                                except:
-                                    pass
-
-                                if not poi_ch_name :
-                                    r1 = 0
-                                if not poi_en_name :
-                                    r2 = 0
-                                print '中文：',poi_ch_name,'英文：',poi_en_name
-                                print '查询结果：','中文',r1,'英文',r2
-
-                                if r1 or r2:
-                                    print '已经存在记录，迭代数据 ... ...'
+                                # tiaoguopoi为poi详情页获取阶段，异常获取标志。若获取异常，tiaoguopoi为1，跳过该poi
+                                if tiaoguopoi:
                                     pass
                                 else:
-                                    print '插入新POI... ...'
-                                    print '中文：' + poi_ch_name,'英文：' + poi_en_name, '本地语言名称:' + poi_en_name, '城市id:' + str(region_id),'城市:'+poi_region, '类型：' + str(tag_id), '评论数:' + str(comments_count),  '排名:' + str(poi_rank), '地址:' + str(poi_address), '电话:' + str(poi_telephone)
-                                    cur.execute(sqli,(poi_ch_name, poi_en_name, poi_loc_name, region_id,poi_region, tag_id,poi_rank,poi_address,poi_telephone,comments_count,source))
-                                    conn.commit()
-                                print '------------------------------------------------'
+                                    sqli = "INSERT INTO " + db + "." + tb + "(poi_ch_name,poi_en_name,poi_loc_name,poi_region_id,poi_region,poi_tag_id,poi_rank,poi_address,poi_telephone,comments_count,source_website)" + " VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+
+                                    # 判断数据库是否已经存在城市数据，决定是插入数据还是更新数据。
+                                    sqli1 = "select * from " + db + "." + tb + " where poi_ch_name = " + "'%s'" % (poi_ch_name)
+                                    sqli2 = "select * from " + db + "." + tb + " where poi_en_name = " + "'%s'" % (poi_en_name)
+
+                                    try:
+                                        r1 = cur.execute(sqli1)
+                                        r2 = cur.execute(sqli2)
+                                    except:
+                                        pass
+
+                                    if not poi_ch_name :
+                                        r1 = 0
+                                    if not poi_en_name :
+                                        r2 = 0
+                                    # print '中文：',poi_ch_name,'英文：',poi_en_name
+                                    # print '查询结果：','中文',r1,'英文',r2
+
+                                    if r1 or r2:
+                                        print '已经存在记录，迭代数据 ... ...'
+                                        pass
+                                    else:
+                                        print '插入新POI... ...'
+                                        print '中文：' + poi_ch_name,'英文：' + poi_en_name, '本地语言名称:' + poi_en_name, '城市id:' + str(region_id),'城市:'+poi_region, '类型：' + str(tag_id), '评论数:' + str(comments_count),  '排名:' + str(poi_rank), '地址:' + str(poi_address), '电话:' + str(poi_telephone)
+                                        cur.execute(sqli,(poi_ch_name, poi_en_name, poi_loc_name, region_id,poi_region, tag_id,poi_rank,poi_address,poi_telephone,comments_count,source))
+                                        conn.commit()
+                                    print '------------------------------------------------'
     cur.close()
     conn.close()
     print '------------finished--------------'
