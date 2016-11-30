@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c615dc2-68e5-4ff0-81cf-683a4aa0c1e9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/poispider/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/citylist.py" afterPath="$PROJECT_DIR$/poispider/citylist.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/dazhongdianping.py" afterPath="$PROJECT_DIR$/poispider/dazhongdianping.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mafengwo.py" afterPath="$PROJECT_DIR$/poispider/mafengwo.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/proxyIP.py" afterPath="$PROJECT_DIR$/poispider/proxyIP.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/qyer.py" afterPath="$PROJECT_DIR$/poispider/qyer.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/qyer_one_city.py" afterPath="$PROJECT_DIR$/poispider/qyer_one_city.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/tripadvisor.py" afterPath="$PROJECT_DIR$/poispider/tripadvisor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Spider.iml" afterPath="$PROJECT_DIR$/.idea/Spider.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/citylist.py" afterPath="$PROJECT_DIR$/citylist.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dazhongdianping.py" afterPath="$PROJECT_DIR$/dazhongdianping.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proxyIP.py" afterPath="$PROJECT_DIR$/proxyIP.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qyer.py" afterPath="$PROJECT_DIR$/qyer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tripadvisor.py" afterPath="$PROJECT_DIR$/tripadvisor.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tst.py" afterPath="$PROJECT_DIR$/tst.py" />
     </list>
     <ignored path="Spider.iws" />
@@ -20,7 +24,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -30,105 +33,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="tst.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tst.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tst.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+            <state relative-caret-position="389">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
-                <element signature="e#16#31#0" expanded="true" />
+                <element signature="e#14#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mafengwo.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mafengwo.py">
+      <file leaf-file-name="dazhongdianping.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/poispider/dazhongdianping.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4163">
-              <caret line="201" column="4" selection-start-line="201" selection-start-column="4" selection-end-line="201" selection-end-column="4" />
-              <folding>
-                <element signature="e#16#38#0" expanded="true" />
-                <element signature="e#3408#4350#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dazhongdianping.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dazhongdianping.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="6246">
               <caret line="404" column="51" selection-start-line="404" selection-start-column="39" selection-end-line="404" selection-end-column="52" />
               <folding>
                 <element signature="e#16#38#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tripadvisor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tripadvisor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="286" column="17" selection-start-line="286" selection-start-column="17" selection-end-line="286" selection-end-column="17" />
-              <folding>
-                <element signature="e#16#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tripadvisor.py" pinned="false" current-in-tab="false">
-        <entry file="file:////cp01-rdqa04-dev106.cp01/chenjun16/jiaobenjilei/tripadvisor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="709">
-              <caret line="395" column="48" selection-start-line="395" selection-start-column="48" selection-end-line="395" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qyer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/qyer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-              <folding>
-                <element signature="e#16#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="citylist.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/citylist.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="966">
-              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
-              <folding>
-                <element signature="e#14#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="proxyIP.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proxyIP.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qyer_one_city.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/qyer_one_city.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -162,18 +86,18 @@
         <option value="//cp01-rdqa04-dev106.cp01/chenjun16/jiaobenjilei/qyer.py" />
         <option value="$PROJECT_DIR$/citylist.py" />
         <option value="$PROJECT_DIR$/qyer.py" />
-        <option value="$PROJECT_DIR$/tst.py" />
         <option value="$PROJECT_DIR$/dazhongdianping.py" />
         <option value="$PROJECT_DIR$/tripadvisor.py" />
         <option value="//cp01-rdqa04-dev106.cp01/chenjun16/jiaobenjilei/tripadvisor.py" />
+        <option value="$PROJECT_DIR$/tst.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1358" />
-    <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="916" />
+    <option name="x" value="31" />
+    <option name="y" value="23" />
+    <option name="width" value="1409" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -186,7 +110,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -199,7 +123,44 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spider" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spider" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spider" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spider" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spider" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="poispider" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -208,12 +169,15 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/poispider" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Spider" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tripadvisor">
+  <component name="RunManager" selected="Python.tst">
     <configuration default="false" name="tripadvisor" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -226,7 +190,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Spider" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tripadvisor.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poispider/tripadvisor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -243,7 +207,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Spider" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qyer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poispider/qyer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -277,7 +241,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Spider" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/citylist.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poispider/citylist.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -294,7 +258,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Spider" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dazhongdianping.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poispider/dazhongdianping.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -442,9 +406,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.tripadvisor" />
-        <item index="1" class="java.lang.String" itemvalue="Python.dazhongdianping" />
-        <item index="2" class="java.lang.String" itemvalue="Python.tst" />
+        <item index="0" class="java.lang.String" itemvalue="Python.tst" />
+        <item index="1" class="java.lang.String" itemvalue="Python.tripadvisor" />
+        <item index="2" class="java.lang.String" itemvalue="Python.dazhongdianping" />
         <item index="3" class="java.lang.String" itemvalue="Python.qyer" />
         <item index="4" class="java.lang.String" itemvalue="Python.citylist" />
       </list>
@@ -467,17 +431,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1616" height="916" extended-state="7" />
+    <frame x="31" y="23" width="1409" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13498099" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14852199" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32738853" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5522959" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2866242" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271028" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32611465" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.559949" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -485,7 +450,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -554,12 +518,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mafengwo.py">
+    <entry file="file://$PROJECT_DIR$/poispider/mafengwo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
           <folding>
-            <element signature="e#16#38#0" expanded="true" />
+            <element signature="e#16#38#0" expanded="false" />
             <element signature="e#3408#4350#0" expanded="false" />
           </folding>
         </state>
@@ -600,12 +564,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mafengwo.py">
+    <entry file="file://$PROJECT_DIR$/poispider/mafengwo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
           <folding>
-            <element signature="e#16#38#0" expanded="true" />
+            <element signature="e#16#38#0" expanded="false" />
             <element signature="e#3408#4350#0" expanded="false" />
           </folding>
         </state>
@@ -625,12 +589,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mafengwo.py">
+    <entry file="file://$PROJECT_DIR$/poispider/mafengwo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#38#0" expanded="true" />
+            <element signature="e#16#38#0" expanded="false" />
             <element signature="e#3408#4350#0" expanded="false" />
           </folding>
         </state>
@@ -702,14 +666,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2016.1/system/python_stubs/-762174762/__builtin__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="4455" column="6" selection-start-line="4455" selection-start-column="6" selection-end-line="4455" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:////cp01-rdqa04-dev106.cp01/chenjun16/py_test/case/xianggang/s_poi.py" />
+    <entry file="file://$USER_HOME$/.PyCharm2016.1/system/python_stubs/-762174762/__builtin__.py" />
+    <entry file="file:///cp01-rdqa04-dev106.cp01/chenjun16/py_test/case/xianggang/s_poi.py" />
     <entry file="file://$PROJECT_DIR$/zhuaqu/宸磋タ/jilu.txt" />
     <entry file="file://$PROJECT_DIR$/zhuaqu/宸撮粠/bali.txt" />
     <entry file="file://$PROJECT_DIR$/ceshimysql.py">
@@ -719,13 +677,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/zhuaqu/miami/jilu.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/zhuaqu/miami/jilu.txt" />
     <entry file="file://$PROJECT_DIR$/chengshijilu.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -740,11 +692,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/zhuaqu/temp/jilu.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/zhuaqu/temp/jilu.txt" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -753,16 +701,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testblock.py" />
-    <entry file="file://$PROJECT_DIR$/test.py">
+    <entry file="file://$PROJECT_DIR$/poispider/qyer_one_city.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="289" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="373" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qyer_one_city.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
+        <state relative-caret-position="342">
           <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
           <folding />
         </state>
@@ -783,76 +724,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proxyIP.py">
+    <entry file="file://$PROJECT_DIR$/poispider/proxyIP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
+        <state relative-caret-position="18">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:////cp01-rdqa04-dev106.cp01/chenjun16/poispider/qyer.py" />
-    <entry file="file:////cp01-rdqa04-dev106.cp01/chenjun16/Spider/Spider/tripadvisor.py" />
-    <entry file="file://$PROJECT_DIR$/citylist.py">
+    <entry file="file:///cp01-rdqa04-dev106.cp01/chenjun16/poispider/qyer.py" />
+    <entry file="file:///cp01-rdqa04-dev106.cp01/chenjun16/Spider/Spider/tripadvisor.py" />
+    <entry file="file:///cp01-rdqa04-dev106.cp01/chenjun16/jiaobenjilei/qyer.py" />
+    <entry file="file://$PROJECT_DIR$/poispider/mafengwo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
-          <folding>
-            <element signature="e#14#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:////cp01-rdqa04-dev106.cp01/chenjun16/jiaobenjilei/qyer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mafengwo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4163">
+        <state relative-caret-position="3258">
           <caret line="201" column="4" selection-start-line="201" selection-start-column="4" selection-end-line="201" selection-end-column="4" />
           <folding>
-            <element signature="e#16#38#0" expanded="true" />
+            <element signature="e#16#38#0" expanded="false" />
             <element signature="e#3408#4350#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tst.py">
+    <entry file="file://$PROJECT_DIR$/poispider/tripadvisor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding>
-            <element signature="e#16#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tripadvisor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
+        <state relative-caret-position="5022">
           <caret line="286" column="17" selection-start-line="286" selection-start-column="17" selection-end-line="286" selection-end-column="17" />
           <folding>
-            <element signature="e#16#38#0" expanded="true" />
+            <element signature="e#16#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:////cp01-rdqa04-dev106.cp01/chenjun16/jiaobenjilei/tripadvisor.py">
+    <entry file="file:///cp01-rdqa04-dev106.cp01/chenjun16/jiaobenjilei/tripadvisor.py" />
+    <entry file="file://$PROJECT_DIR$/poispider/qyer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="709">
-          <caret line="395" column="48" selection-start-line="395" selection-start-column="48" selection-end-line="395" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qyer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="-61">
           <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
           <folding>
             <element signature="e#16#38#0" expanded="true" />
@@ -860,12 +767,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dazhongdianping.py">
+    <entry file="file://$PROJECT_DIR$/poispider/citylist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="-558">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5292">
+          <caret line="301" column="44" selection-start-line="301" selection-start-column="44" selection-end-line="301" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/poispider/dazhongdianping.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6246">
           <caret line="404" column="51" selection-start-line="404" selection-start-column="39" selection-end-line="404" selection-end-column="52" />
           <folding>
             <element signature="e#16#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tst.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#27#0" expanded="true" />
           </folding>
         </state>
       </provider>

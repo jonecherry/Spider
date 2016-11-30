@@ -1,13 +1,15 @@
 #coding=utf-8
-import requests
-import os
-import proxyIP
 import random
-import MySQLdb
-from lxml import etree
 import re
-import urllib2
 import sys
+import urllib2
+
+import MySQLdb
+import requests
+from lxml import etree
+
+import proxyIP
+
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
